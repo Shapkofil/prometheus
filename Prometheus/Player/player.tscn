@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/player.gd" type="Script" id=1]
 [ext_resource path="res://Player/CyclopsMovement/cyclops movement 1.png" type="Texture" id=2]
-[ext_resource path="res://Shaders/tint_shader.shader" type="Shader" id=3]
 [ext_resource path="res://Player/CyclopsMovement/cyclops movement 2.png" type="Texture" id=4]
 [ext_resource path="res://Player/CyclopsMovement/cyclops movement 3.png" type="Texture" id=5]
 
@@ -25,22 +24,6 @@ extents = Vector2( 27.4608, 19.0608 )
 [sub_resource type="RayShape2D" id=3]
 length = 47.6532
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = ExtResource( 3 )
-shader_param/boost = 1.19
-shader_param/grille_opacity = 1.0
-shader_param/scanlines_opacity = 1.0
-shader_param/vignette_opacity = 0.22
-shader_param/scanlines_speed = 0.0
-shader_param/show_grille = false
-shader_param/show_scanlines = true
-shader_param/show_vignette = true
-shader_param/show_curvature = false
-shader_param/screen_size = Vector2( 320, 180 )
-shader_param/aberration_amount = 1.0
-shader_param/move_aberration = false
-shader_param/aberration_speed = 1.11
-
 [node name="player" type="KinematicBody2D"]
 position = Vector2( 947.627, 530.258 )
 script = ExtResource( 1 )
@@ -61,13 +44,3 @@ shape = SubResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-
-[node name="ColorRect" type="ColorRect" parent="Camera2D"]
-material = SubResource( 4 )
-margin_left = -951.649
-margin_top = -536.66
-margin_right = 968.351
-margin_bottom = 543.34
-__meta__ = {
-"_edit_use_anchors_": false
-}

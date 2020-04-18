@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://UI/west_england.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://UI/QuitToMain.gd" type="Script" id=2]
@@ -22,6 +22,10 @@ size = 40
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=5]
+size = 38
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
 size = 40
 font_data = ExtResource( 1 )
 
@@ -81,15 +85,27 @@ rect_pivot_offset = Vector2( 160, 35 )
 custom_fonts/font = SubResource( 4 )
 text = "Save game"
 
+[node name="RestartLevel" type="Button" parent="."]
+margin_left = 801.67
+margin_top = 600.0
+margin_right = 1121.67
+margin_bottom = 670.0
+custom_fonts/font = SubResource( 5 )
+text = "Restart level"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="QuitToMain" type="Button" parent="."]
 margin_left = 746.0
-margin_top = 650.0
+margin_top = 730.0
 margin_right = 1206.0
-margin_bottom = 720.0
+margin_bottom = 800.0
 rect_pivot_offset = Vector2( 230, 35 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "Quit to main menu"
 script = ExtResource( 2 )
 [connection signal="pressed" from="Resume" to="." method="_on_Resume_pressed"]
 [connection signal="pressed" from="Settings" to="Settings" method="_on_Settings_pressed"]
+[connection signal="pressed" from="RestartLevel" to="." method="_on_RestartLevel_pressed"]
 [connection signal="pressed" from="QuitToMain" to="QuitToMain" method="_on_QuitToMain_pressed"]
