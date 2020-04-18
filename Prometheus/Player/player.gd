@@ -23,7 +23,11 @@ var jumping = false
 
 var prev_jump_pressed = false
 
-var t = Timer.new()
+
+func _ready():
+	var positionX = GlobalVars.playerSavedPosition[0]
+	var positionY = GlobalVars.playerSavedPosition[1]
+	position = Vector2(positionX, positionY)
 
 
 func _physics_process(delta):
@@ -81,5 +85,5 @@ func _physics_process(delta):
 	if Input.is_key_pressed(KEY_ESCAPE):
 		get_tree().change_scene("res://UI/PauseMenu.tscn")
 	
-	GlobalVars.playerX = get_viewport().size.x
-	GlobalVars.playerY = get_viewport().size.y
+	GlobalVars.playerSavedPosition = get_position()
+	
