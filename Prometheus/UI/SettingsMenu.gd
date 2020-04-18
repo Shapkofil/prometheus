@@ -8,7 +8,8 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	print(GlobalVars.lastScene)
+
 
 
 func _on_Settings_pressed():

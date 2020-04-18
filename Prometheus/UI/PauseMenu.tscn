@@ -90,5 +90,6 @@ rect_pivot_offset = Vector2( 230, 35 )
 custom_fonts/font = SubResource( 5 )
 text = "Quit to main menu"
 script = ExtResource( 2 )
+[connection signal="pressed" from="Resume" to="." method="_on_Resume_pressed"]
 [connection signal="pressed" from="Settings" to="Settings" method="_on_Settings_pressed"]
 [connection signal="pressed" from="QuitToMain" to="QuitToMain" method="_on_QuitToMain_pressed"]

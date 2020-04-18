@@ -23,6 +23,8 @@ var jumping = false
 
 var prev_jump_pressed = false
 
+var t = Timer.new()
+
 
 func _physics_process(delta):
 	# Create forces
@@ -75,3 +77,9 @@ func _physics_process(delta):
 
 	on_air_time += delta
 	prev_jump_pressed = jump
+	
+	if Input.is_key_pressed(KEY_ESCAPE):
+		get_tree().change_scene("res://UI/PauseMenu.tscn")
+	
+	GlobalVars.playerX = get_viewport().size.x
+	GlobalVars.playerY = get_viewport().size.y

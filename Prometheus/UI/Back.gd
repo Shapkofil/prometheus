@@ -7,5 +7,4 @@ func _ready():
 
 
 func _on_Back_pressed():
-	var sceneToGo = GlobalVars.lastScene
-	get_tree().change_scene("res://UI/MainMenu.tscn")
+	get_tree().change_scene(GlobalVars.lastScene)
