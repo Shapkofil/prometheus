@@ -1,13 +1,30 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player/player.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Shaders/tint_shader.shader" type="Shader" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 27.4608, 19.0608 )
 
 [sub_resource type="RayShape2D" id=2]
 length = 47.6532
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 3 )
+shader_param/boost = 1.19
+shader_param/grille_opacity = 1.0
+shader_param/scanlines_opacity = 1.0
+shader_param/vignette_opacity = 0.22
+shader_param/scanlines_speed = 0.0
+shader_param/show_grille = false
+shader_param/show_scanlines = true
+shader_param/show_vignette = true
+shader_param/show_curvature = false
+shader_param/screen_size = Vector2( 320, 180 )
+shader_param/aberration_amount = 0.0
+shader_param/move_aberration = true
+shader_param/aberration_speed = 6.51
 
 [node name="player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -25,3 +42,13 @@ shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D"]
+material = SubResource( 3 )
+margin_left = -960.0
+margin_top = -540.0
+margin_right = 960.0
+margin_bottom = 540.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
