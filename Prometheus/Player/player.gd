@@ -3,7 +3,7 @@ extends KinematicBody2D
 # This demo shows how to build a kinematic controller.
 
 # Member variables
-export var GRAVITY = 500.0 # pixels/second/second
+export var GRAVITY = 700.0 # pixels/second/second
 
 # Angle in degrees towards either side that the player can consider "floor"
 export var FLOOR_ANGLE_TOLERANCE = 40
@@ -11,7 +11,7 @@ export var WALK_FORCE = 600
 export var WALK_MIN_SPEED = 10
 export var WALK_MAX_SPEED = 200
 export var STOP_FORCE = 2000
-export var JUMP_SPEED = 200
+export var JUMP_SPEED = 500
 export var JUMP_MAX_AIRBORNE_TIME = 0.2
 
 export var SLIDE_STOP_VELOCITY = 1.0 # one pixel/second
