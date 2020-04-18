@@ -12,10 +12,12 @@ func _ready():
 
 func update_fire(curr, maxi):
 	var tile_pos = init_pos
-	for i in range(curr):
-		set_cellv(tile_pos, _tileset.find_tile_by_name("Coin"))
+	clear()
+	set_cellv(tile_pos, _tileset.find_tile_by_name("Bottom_socket"))
+	for i in range(maxi - 1):
 		tile_pos.y -= 1
+		set_cellv(tile_pos, _tileset.find_tile_by_name("Middle_socket"))
+	set_cellv(tile_pos, _tileset.find_tile_by_name("Top_socket"))
 	pass
 	
 	 
-

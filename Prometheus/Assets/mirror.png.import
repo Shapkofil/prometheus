@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mininicular.png-b6eb3dfdbae1d408c2765d3ad00c0d99.stex"
+path="res://.import/mirror.png-3b5e3ba085a59e2807d9c0d503bca477.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mininicular.png"
-dest_files=[ "res://.import/mininicular.png-b6eb3dfdbae1d408c2765d3ad00c0d99.stex" ]
+source_file="res://Assets/mirror.png"
+dest_files=[ "res://.import/mirror.png-3b5e3ba085a59e2807d9c0d503bca477.stex" ]
 
 [params]
 
