@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cyclops movement 1.png-fecf8305e6b8b6dc29246d0e4e00bde7.stex"
+path="res://.import/cyclops movement 1.png-35d1438b4e131522f8630836d30882ba.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/CyclopsMovement/cyclops movement 1.png"
-dest_files=[ "res://.import/cyclops movement 1.png-fecf8305e6b8b6dc29246d0e4e00bde7.stex" ]
+source_file="res://Assets/CyclopsMovement/cyclops movement 1.png"
+dest_files=[ "res://.import/cyclops movement 1.png-35d1438b4e131522f8630836d30882ba.stex" ]
 
 [params]
 

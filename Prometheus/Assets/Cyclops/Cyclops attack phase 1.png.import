@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Cyclops standing and after attack.png-c57370f56951c8eaea025cd5725b0b5a.stex"
+path="res://.import/Cyclops attack phase 1.png-14e6d2c99d98e5012f3602942f061311.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/Cyclops/Cyclops standing and after attack.png"
-dest_files=[ "res://.import/Cyclops standing and after attack.png-c57370f56951c8eaea025cd5725b0b5a.stex" ]
+source_file="res://Assets/Cyclops/Cyclops attack phase 1.png"
+dest_files=[ "res://.import/Cyclops attack phase 1.png-14e6d2c99d98e5012f3602942f061311.stex" ]
 
 [params]
 

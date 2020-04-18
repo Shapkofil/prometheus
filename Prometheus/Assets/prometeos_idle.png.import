@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Attack Cyclops.png-7afe0a9194a186da3cfc99dee60cc0e5.stex"
+path="res://.import/prometeos_idle.png-98d3261409e11c1e2119f71b6cb59ce9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/Cyclops/Attack Cyclops.png"
-dest_files=[ "res://.import/Attack Cyclops.png-7afe0a9194a186da3cfc99dee60cc0e5.stex" ]
+source_file="res://Assets/prometeos_idle.png"
+dest_files=[ "res://.import/prometeos_idle.png-98d3261409e11c1e2119f71b6cb59ce9.stex" ]
 
 [params]
 

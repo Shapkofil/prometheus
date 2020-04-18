@@ -25,6 +25,9 @@ var random_props = {}
 
 var prev_jump_pressed = false
 
+# Stats
+export var fire = 6
+
 
 func _ready():
 	var positionX = GlobalVars.playerSavedPosition[0]
@@ -63,7 +66,7 @@ func _physics_process(delta):
 		vlen -= STOP_FORCE * delta
 		if vlen < 0:
 			vlen = 0
-			$AnimatedSprite.play("idle")
+			$AnimatedSprite.play("idle-loop")
 
 		velocity.x = vlen * vsign
 
@@ -83,8 +86,12 @@ func _physics_process(delta):
 		# Jump must also be allowed to happen if the character left the floor a little bit ago.
 		# Makes controls more snappy.
 		velocity.y = -JUMP_SPEED
+		
 		jumping = true
 
+	if jumping:
+		$AnimatedSprite.play("jump-loop")
+	
 	on_air_time += delta
 	prev_jump_pressed = jump
 	
