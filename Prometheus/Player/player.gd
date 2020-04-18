@@ -43,21 +43,25 @@ func _physics_process(delta):
 		if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED:
 			force.x -= WALK_FORCE
 			stop = false
-			
+			$AnimatedSprite.play("move-loop")
+			$AnimatedSprite.flip_h = false
 		
 	elif walk_right:
 		if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
 			force.x += WALK_FORCE
 			stop = false
-			# print("right")
+			$AnimatedSprite.play("move-loop")
+			$AnimatedSprite.flip_h = true
 
 	if stop:
+		
 		var vsign = sign(velocity.x)
 		var vlen = abs(velocity.x)
 
 		vlen -= STOP_FORCE * delta
 		if vlen < 0:
 			vlen = 0
+			$AnimatedSprite.play("idle")
 
 		velocity.x = vlen * vsign
 
