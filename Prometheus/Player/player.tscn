@@ -24,7 +24,6 @@ extents = Vector2( 17.0694, 41.185 )
 [node name="player" type="KinematicBody2D"]
 position = Vector2( 947.627, 530.258 )
 script = ExtResource( 1 )
-GRAVITY = 700.0
 WALK_MAX_SPEED = 300
 JUMP_SPEED = 400
 

@@ -21,6 +21,8 @@ var velocity = Vector2()
 var on_air_time = 100
 var jumping = false
 
+var random_props = {}
+
 var prev_jump_pressed = false
 
 
