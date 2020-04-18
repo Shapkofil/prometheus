@@ -1,0 +1,13 @@
+extends Camera2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	update_fire()
+	pass # Replace with function body.
+
+
+func update_fire():
+	var player = get_parent()
+	for i in range(2):
+		get_child(i).update_fire(player.fire, player.max_fire)

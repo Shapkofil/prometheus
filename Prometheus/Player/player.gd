@@ -26,7 +26,8 @@ var random_props = {}
 var prev_jump_pressed = false
 
 # Stats
-export var fire = 6
+export var fire = 5
+export var max_fire = 6
 
 
 func _ready():

@@ -109,6 +109,3 @@ flip_h = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 shape = SubResource( 13 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
