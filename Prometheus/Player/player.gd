@@ -3,19 +3,19 @@ extends KinematicBody2D
 # This demo shows how to build a kinematic controller.
 
 # Member variables
-const GRAVITY = 500.0 # pixels/second/second
+export var GRAVITY = 500.0 # pixels/second/second
 
 # Angle in degrees towards either side that the player can consider "floor"
-const FLOOR_ANGLE_TOLERANCE = 40
-const WALK_FORCE = 600
-const WALK_MIN_SPEED = 10
-const WALK_MAX_SPEED = 200
-const STOP_FORCE = 2000
-const JUMP_SPEED = 200
-const JUMP_MAX_AIRBORNE_TIME = 0.2
+export var FLOOR_ANGLE_TOLERANCE = 40
+export var WALK_FORCE = 600
+export var WALK_MIN_SPEED = 10
+export var WALK_MAX_SPEED = 200
+export var STOP_FORCE = 2000
+export var JUMP_SPEED = 200
+export var JUMP_MAX_AIRBORNE_TIME = 0.2
 
-const SLIDE_STOP_VELOCITY = 1.0 # one pixel/second
-const SLIDE_STOP_MIN_TRAVEL = 1.0 # one pixel
+export var SLIDE_STOP_VELOCITY = 1.0 # one pixel/second
+export var SLIDE_STOP_MIN_TRAVEL = 1.0 # one pixel
 
 var velocity = Vector2()
 var on_air_time = 100

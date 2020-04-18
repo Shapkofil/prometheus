@@ -22,12 +22,13 @@ shader_param/show_scanlines = true
 shader_param/show_vignette = true
 shader_param/show_curvature = false
 shader_param/screen_size = Vector2( 320, 180 )
-shader_param/aberration_amount = 0.0
-shader_param/move_aberration = true
-shader_param/aberration_speed = 6.51
+shader_param/aberration_amount = 1.0
+shader_param/move_aberration = false
+shader_param/aberration_speed = 1.11
 
 [node name="player" type="KinematicBody2D"]
 script = ExtResource( 1 )
+JUMP_SPEED = 400
 
 [node name="sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
