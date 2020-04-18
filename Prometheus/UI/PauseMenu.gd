@@ -8,4 +8,4 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	GlobalVars.lastScene = "res://PauseMenu.tscn"
+	GlobalVars.lastScene = "res://UI/PauseMenu.tscn"

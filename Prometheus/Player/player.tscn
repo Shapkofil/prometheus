@@ -27,6 +27,7 @@ shader_param/move_aberration = false
 shader_param/aberration_speed = 1.11
 
 [node name="player" type="KinematicBody2D"]
+position = Vector2( 947.627, 530.258 )
 script = ExtResource( 1 )
 JUMP_SPEED = 400
 
@@ -46,10 +47,10 @@ current = true
 
 [node name="ColorRect" type="ColorRect" parent="Camera2D"]
 material = SubResource( 3 )
-margin_left = -960.0
-margin_top = -540.0
-margin_right = 960.0
-margin_bottom = 540.0
+margin_left = -951.649
+margin_top = -536.66
+margin_right = 968.351
+margin_bottom = 543.34
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -13,4 +13,4 @@ func _ready():
 
 
 func _on_QuitToMain_pressed():
-	get_tree().change_scene("res://MainMenu.tscn")
+	get_tree().change_scene("res://UI/MainMenu.tscn")

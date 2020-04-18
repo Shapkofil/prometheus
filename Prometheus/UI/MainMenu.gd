@@ -8,7 +8,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	GlobalVars.lastScene = "res://MainMenu.tscn"
+	GlobalVars.lastScene = "res://UI/MainMenu.tscn"
 
 func _on_Play_pressed():
-	get_tree().change_scene("res://PauseMenu.tscn")
+	get_tree().change_scene("res://UI/PauseMenu.tscn")
