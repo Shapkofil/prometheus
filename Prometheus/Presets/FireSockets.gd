@@ -8,7 +8,6 @@ var init_pos
 func _ready():
 	_tileset = get_tileset()
 	init_pos = world_to_map(get_parent().get_node("BottomPlace").position)
-	update_fire(0,6)
 
 
 func update_fire(curr, maxi):

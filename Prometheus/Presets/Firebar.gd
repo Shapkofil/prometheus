@@ -3,6 +3,7 @@ extends Camera2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	get_parent().subscribe(self)
 	update_fire()
 	pass # Replace with function body.
 

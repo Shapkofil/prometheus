@@ -30,11 +30,22 @@ export var fire = 5
 export var max_fire = 6
 
 
+
 func _ready():
 	var positionX = GlobalVars.playerSavedPosition[0]
 	var positionY = GlobalVars.playerSavedPosition[1]
 	position = Vector2(positionX, positionY)
 
+var fire_subscribers = []
+
+func subscribe(subscriber):
+	fire_subscribers.append(subscriber)
+	
+func affect_fire(t, e):
+	fire += t;
+	max_fire += e;
+	for sub in fire_subscribers:
+		sub.update_fire()
 
 func _physics_process(delta):
 	# Create forces
