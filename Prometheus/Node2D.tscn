@@ -14,6 +14,7 @@
 [ext_resource path="res://UI/SettingsMenu.gd" type="Script" id=12]
 [ext_resource path="res://Resume.gd" type="Script" id=13]
 [ext_resource path="res://CanvasLayer.gd" type="Script" id=14]
+[ext_resource path="res://Player/Legs.gd" type="Script" id=15]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -171,7 +172,7 @@ fire = 4
 [node name="Legs" type="Node2D" parent="player"]
 position = Vector2( -5.34381, 30.5093 )
 scale = Vector2( 0.5, 0.5 )
-script = ExtResource( 9 )
+script = ExtResource( 15 )
 
 [node name="DurtParticles" type="Particles2D" parent="player/Legs"]
 position = Vector2( -36.2681, -3.68829 )
@@ -225,7 +226,10 @@ margin_top = 160.0
 margin_right = 1080.0
 margin_bottom = 220.0
 rect_pivot_offset = Vector2( 125, 30 )
+<<<<<<< HEAD
 custom_fonts/font = SubResource( 9 )
+=======
+>>>>>>> c87cbb84c88fd37f2861f5325668e8243bf0b700
 text = "Pause menu"
 __meta__ = {
 "_edit_use_anchors_": false
