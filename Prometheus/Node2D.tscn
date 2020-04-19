@@ -1,10 +1,10 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Assets/Tiles/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Player/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Presets/Interactable/Fire_coin.gd" type="Script" id=3]
 [ext_resource path="res://Presets/Interactable/Interactable.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Presets/FireBar/Player UI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Player/Player UI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Presets/Interactable/Mirror.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Fire Bar/firebar.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Entities/mirror.png" type="Texture" id=8]
@@ -14,7 +14,7 @@
 [ext_resource path="res://CyclopsMob.gd" type="Script" id=12]
 [ext_resource path="res://Resume.gd" type="Script" id=13]
 [ext_resource path="res://CanvasLayer.gd" type="Script" id=14]
-[ext_resource path="res://Player/Legs.gd" type="Script" id=15]
+[ext_resource path="res://Player/Legs.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/Entities/CyclopsMovement/cyclops movement 1.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Entities/CyclopsMovement/cyclops movement 2.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Entities/CyclopsMovement/cyclops movement 3.png" type="Texture" id=18]
@@ -58,48 +58,36 @@ shader_param/g_offset_y = 0.0
 shader_param/b_offset_x = 0.2
 shader_param/b_offset_y = 0.0
 
-[sub_resource type="ParticlesMaterial" id=3]
-flag_disable_z = true
-direction = Vector3( -1, -0.5, 0 )
-spread = 9.83
-gravity = Vector3( 0, 93, 0 )
-initial_velocity = 197.4
-initial_velocity_random = 0.71
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 6.0
-scale_random = 1.0
-
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 0, 192, 64, 64 )
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ SubResource( 4 ) ],
+"frames": [ SubResource( 3 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
+
+[sub_resource type="DynamicFont" id=5]
+size = 40
+font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 40
 font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=7]
-size = 40
-font_data = ExtResource( 9 )
-
-[sub_resource type="DynamicFont" id=8]
 size = 38
 font_data = ExtResource( 9 )
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=8]
 size = 40
 font_data = ExtResource( 9 )
 
-[sub_resource type="SpriteFrames" id=10]
+[sub_resource type="SpriteFrames" id=9]
 animations = [ {
 "frames": [ ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": true,
@@ -107,7 +95,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=11]
+[sub_resource type="CapsuleShape2D" id=10]
 height = 65.5869
 
 [node name="Node2D" type="Node2D"]
@@ -124,23 +112,11 @@ position = Vector2( 149.238, 69.0661 )
 GRAVITY = 1000.0
 JUMP_SPEED = 500
 JUMP_MAX_AIRBORNE_TIME = 0.5
-TIME_FLEX = 0.2
 fire = 4
 
 [node name="Camera2D" parent="player" instance=ExtResource( 5 )]
 
-[node name="Legs" type="Node2D" parent="player"]
-position = Vector2( -5.34381, 30.5093 )
-scale = Vector2( 0.5, 0.5 )
-script = ExtResource( 15 )
-
-[node name="DurtParticles" type="Particles2D" parent="player/Legs"]
-position = Vector2( -36.2681, -3.68829 )
-amount = 4
-lifetime = 0.5
-explosiveness = 0.2
-randomness = 0.1
-process_material = SubResource( 3 )
+[node name="Legs" parent="player" instance=ExtResource( 15 )]
 
 [node name="Mirror" parent="." instance=ExtResource( 4 )]
 position = Vector2( 896.402, 114.119 )
@@ -154,7 +130,7 @@ position = Vector2( 263.64, 153.79 )
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Coin"]
-frames = SubResource( 5 )
+frames = SubResource( 4 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 pause_mode = 2
@@ -186,7 +162,7 @@ margin_top = 300.0
 margin_right = 1080.0
 margin_bottom = 360.0
 rect_pivot_offset = Vector2( 125, 30 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 text = "Pause menu"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -198,7 +174,7 @@ margin_top = 420.0
 margin_right = 1120.0
 margin_bottom = 490.0
 rect_pivot_offset = Vector2( 160, 35 )
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 text = "Resume"
 script = ExtResource( 13 )
 __meta__ = {
@@ -210,7 +186,7 @@ margin_left = 800.0
 margin_top = 520.0
 margin_right = 1120.0
 margin_bottom = 590.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "Restart level"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -222,7 +198,7 @@ margin_top = 620.0
 margin_right = 1180.0
 margin_bottom = 690.0
 rect_pivot_offset = Vector2( 230, 35 )
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 8 )
 text = "Quit to main menu"
 script = ExtResource( 10 )
 __meta__ = {
@@ -233,12 +209,12 @@ __meta__ = {
 script = ExtResource( 12 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Enemy"]
-frames = SubResource( 10 )
+frames = SubResource( 9 )
 animation = "move-loop"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
 position = Vector2( -4.76656, 2.38329 )
-shape = SubResource( 11 )
+shape = SubResource( 10 )
 [connection signal="pressed" from="CanvasLayer/PauseMenu/Resume" to="CanvasLayer" method="_on_Resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/RestartLevel" to="CanvasLayer" method="_on_RestartLevel_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/QuitToMain" to="CanvasLayer" method="_on_QuitToMain_pressed"]

@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Player/Legs.gd" type="Script" id=1]
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+direction = Vector3( -1, -0.5, 0 )
+spread = 9.83
+gravity = Vector3( 0, 93, 0 )
+initial_velocity = 197.4
+initial_velocity_random = 0.71
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 6.0
+scale_random = 1.0
+
+[node name="Legs" type="Node2D"]
+position = Vector2( -5.34381, 30.5093 )
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 1 )
+
+[node name="DurtParticles" type="Particles2D" parent="."]
+position = Vector2( -36.2681, -3.68829 )
+amount = 4
+lifetime = 0.5
+explosiveness = 0.2
+randomness = 0.1
+process_material = SubResource( 1 )
