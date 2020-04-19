@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Player/player.tscn" type="PackedScene" id=2]
@@ -104,7 +104,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 } ]
 1/z_index = 0
 
-[sub_resource type="ParticlesMaterial" id=8]
+[sub_resource type="ParticlesMaterial" id=6]
 flag_disable_z = true
 direction = Vector3( -1, -0.5, 0 )
 spread = 9.83
@@ -116,22 +116,18 @@ orbit_velocity_random = 0.0
 scale = 6.0
 scale_random = 1.0
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=7]
 flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 0, 192, 64, 64 )
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=8]
 animations = [ {
-"frames": [ SubResource( 6 ) ],
+"frames": [ SubResource( 7 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
-
-[sub_resource type="DynamicFont" id=8]
-size = 40
-font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=9]
 size = 40
@@ -146,10 +142,14 @@ size = 40
 font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=12]
-size = 38
+size = 40
 font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=13]
+size = 38
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=14]
 size = 40
 font_data = ExtResource( 9 )
 
@@ -179,7 +179,7 @@ amount = 4
 lifetime = 0.5
 explosiveness = 0.2
 randomness = 0.1
-process_material = SubResource( 8 )
+process_material = SubResource( 6 )
 
 [node name="Mirror" parent="." instance=ExtResource( 4 )]
 position = Vector2( 896.402, 114.119 )
@@ -193,7 +193,7 @@ position = Vector2( 263.64, 153.79 )
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Coin"]
-frames = SubResource( 7 )
+frames = SubResource( 8 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 pause_mode = 2
@@ -225,7 +225,7 @@ margin_top = 160.0
 margin_right = 1080.0
 margin_bottom = 220.0
 rect_pivot_offset = Vector2( 125, 30 )
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 text = "Pause menu"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -237,7 +237,7 @@ margin_top = 300.0
 margin_right = 1120.0
 margin_bottom = 370.0
 rect_pivot_offset = Vector2( 160, 35 )
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 text = "Resume"
 script = ExtResource( 13 )
 __meta__ = {
@@ -250,7 +250,7 @@ margin_top = 400.0
 margin_right = 1120.0
 margin_bottom = 470.0
 rect_pivot_offset = Vector2( 160, 35 )
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 11 )
 text = "Settings"
 script = ExtResource( 12 )
 __meta__ = {
@@ -263,7 +263,7 @@ margin_top = 500.0
 margin_right = 1120.0
 margin_bottom = 570.0
 rect_pivot_offset = Vector2( 160, 35 )
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 12 )
 text = "Save game"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -274,7 +274,7 @@ margin_left = 801.67
 margin_top = 600.0
 margin_right = 1121.67
 margin_bottom = 670.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 13 )
 text = "Restart level"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -286,7 +286,7 @@ margin_top = 730.0
 margin_right = 1206.0
 margin_bottom = 800.0
 rect_pivot_offset = Vector2( 230, 35 )
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 text = "Quit to main menu"
 script = ExtResource( 10 )
 __meta__ = {
