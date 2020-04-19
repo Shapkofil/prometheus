@@ -226,10 +226,7 @@ margin_top = 160.0
 margin_right = 1080.0
 margin_bottom = 220.0
 rect_pivot_offset = Vector2( 125, 30 )
-<<<<<<< HEAD
 custom_fonts/font = SubResource( 9 )
-=======
->>>>>>> c87cbb84c88fd37f2861f5325668e8243bf0b700
 text = "Pause menu"
 __meta__ = {
 "_edit_use_anchors_": false
