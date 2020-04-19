@@ -143,10 +143,14 @@ size = 40
 font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=12]
-size = 38
+size = 40
 font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=13]
+size = 38
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=14]
 size = 40
 font_data = ExtResource( 9 )
 
@@ -222,6 +226,7 @@ margin_top = 160.0
 margin_right = 1080.0
 margin_bottom = 220.0
 rect_pivot_offset = Vector2( 125, 30 )
+custom_fonts/font = SubResource( 9 )
 text = "Pause menu"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -233,7 +238,7 @@ margin_top = 300.0
 margin_right = 1120.0
 margin_bottom = 370.0
 rect_pivot_offset = Vector2( 160, 35 )
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 text = "Resume"
 script = ExtResource( 13 )
 __meta__ = {
@@ -246,7 +251,7 @@ margin_top = 400.0
 margin_right = 1120.0
 margin_bottom = 470.0
 rect_pivot_offset = Vector2( 160, 35 )
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 11 )
 text = "Settings"
 script = ExtResource( 12 )
 __meta__ = {
@@ -259,7 +264,7 @@ margin_top = 500.0
 margin_right = 1120.0
 margin_bottom = 570.0
 rect_pivot_offset = Vector2( 160, 35 )
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 12 )
 text = "Save game"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -270,7 +275,7 @@ margin_left = 801.67
 margin_top = 600.0
 margin_right = 1121.67
 margin_bottom = 670.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 13 )
 text = "Restart level"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -282,7 +287,7 @@ margin_top = 730.0
 margin_right = 1206.0
 margin_bottom = 800.0
 rect_pivot_offset = Vector2( 230, 35 )
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 text = "Quit to main menu"
 script = ExtResource( 10 )
 __meta__ = {
