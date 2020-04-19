@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=28 format=2]
+=======
+[gd_scene load_steps=18 format=2]
+>>>>>>> 3279b43a6c624b019f1804b2ef343b8ed45da548
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Player/player.tscn" type="PackedScene" id=2]
@@ -8,12 +12,16 @@
 [ext_resource path="res://Presets/Interactable/Mirror.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Fire Bar/firebar.png" type="Texture" id=7]
 [ext_resource path="res://Assets/mirror.png" type="Texture" id=8]
+<<<<<<< HEAD
 [ext_resource path="res://UI/west_england.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://UI/QuitToMain.gd" type="Script" id=10]
 [ext_resource path="res://UI/PauseMenu.gd" type="Script" id=11]
 [ext_resource path="res://UI/SettingsMenu.gd" type="Script" id=12]
 [ext_resource path="res://Resume.gd" type="Script" id=13]
 [ext_resource path="res://CanvasLayer.gd" type="Script" id=14]
+=======
+[ext_resource path="res://Durt.gd" type="Script" id=9]
+>>>>>>> 3279b43a6c624b019f1804b2ef343b8ed45da548
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -104,6 +112,18 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 } ]
 1/z_index = 0
 
+[sub_resource type="ParticlesMaterial" id=8]
+flag_disable_z = true
+direction = Vector3( -1, -0.5, 0 )
+spread = 9.83
+gravity = Vector3( 0, 93, 0 )
+initial_velocity = 197.4
+initial_velocity_random = 0.71
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 6.0
+scale_random = 1.0
+
 [sub_resource type="AtlasTexture" id=6]
 flags = 4
 atlas = ExtResource( 7 )
@@ -152,8 +172,22 @@ tile_data = PoolIntArray( 327673, 0, 0, 327674, 0, 0, 327675, 0, 0, 327676, 0, 0
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 602.238, 124.066 )
+fire = 4
 
 [node name="Camera2D" parent="player" instance=ExtResource( 5 )]
+
+[node name="Legs" type="Node2D" parent="player"]
+position = Vector2( -5.34381, 30.5093 )
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 9 )
+
+[node name="DurtParticles" type="Particles2D" parent="player/Legs"]
+position = Vector2( -36.2681, -3.68829 )
+amount = 4
+lifetime = 0.5
+explosiveness = 0.2
+randomness = 0.1
+process_material = SubResource( 8 )
 
 [node name="Mirror" parent="." instance=ExtResource( 4 )]
 position = Vector2( 896.402, 114.119 )
