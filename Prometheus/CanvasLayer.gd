@@ -18,14 +18,10 @@ func _on_Resume_pressed():
 	get_child(0).visible = not isPaused
 
 
-
-func _on_Settings_pressed():
-# warning-ignore:return_value_discarded
-	get_tree().change_scene("res://UI/Settings.tscn")
-
-
 func _on_RestartLevel_pressed():
-	GlobalVars.playerSavedPosition = [100, 0]
+	GlobalVars.hasCoin = false
+	GlobalVars.hasMirror = false
+	GlobalVars.playerSavedPosition = [100, 200]
 	get_tree().paused = false
 # warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Node2D.tscn")
@@ -33,6 +29,8 @@ func _on_RestartLevel_pressed():
 
 func _on_QuitToMain_pressed():
 	get_tree().paused = false
+	GlobalVars.hasCoin = false
+	GlobalVars.hasMirror = false
 	GlobalVars.playerSavedPosition = [100, 0]
 # warning-ignore:return_value_discarded
 	get_tree().change_scene("res://UI/MainMenu.tscn")

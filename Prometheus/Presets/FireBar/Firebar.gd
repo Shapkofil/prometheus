@@ -5,7 +5,6 @@ extends Camera2D
 func _ready():
 	get_parent().subscribe(self)
 	update_fire()
-	pass # Replace with function body.
 
 
 func update_fire():
