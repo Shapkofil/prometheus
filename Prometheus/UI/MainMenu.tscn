@@ -19,6 +19,7 @@ size = 40
 font_data = ExtResource( 1 )
 
 [node name="MainMenu" type="Control"]
+pause_mode = 2
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -65,5 +66,5 @@ __meta__ = {
 }
 [connection signal="pressed" from="Play" to="Play" method="_on_Play_pressed"]
 [connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
-[connection signal="pressed" from="Settings" to="Settings" method="_on_Settings_pressed"]
+[connection signal="pressed" from="Settings" to="." method="_on_Settings_pressed"]
 [connection signal="pressed" from="Exit" to="Exit" method="_on_Exit_pressed"]

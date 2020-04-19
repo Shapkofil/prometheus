@@ -35,6 +35,8 @@ func _ready():
 	var positionX = GlobalVars.playerSavedPosition[0]
 	var positionY = GlobalVars.playerSavedPosition[1]
 	position = Vector2(positionX, positionY)
+	GlobalVars.lastScene = "res://Node2D.tscn"
+	get_tree().paused = false
 
 var fire_subscribers = []
 
@@ -106,9 +108,6 @@ func _physics_process(delta):
 	
 	on_air_time += delta
 	prev_jump_pressed = jump
-	
-	if Input.is_key_pressed(KEY_ESCAPE):
-		get_tree().change_scene("res://UI/PauseMenu.tscn")
 	
 	GlobalVars.playerSavedPosition = get_position()
 	

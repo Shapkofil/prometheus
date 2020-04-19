@@ -11,4 +11,8 @@ func _ready():
 	GlobalVars.lastScene = "res://UI/MainMenu.tscn"
 
 func _on_Play_pressed():
-	get_tree().change_scene("res://UI/PauseMenu.tscn")
+	get_tree().change_scene("res://Node2D.tscn")
+
+
+func _on_Settings_pressed():
+	get_tree().change_scene("res://UI/Settings.tscn")
