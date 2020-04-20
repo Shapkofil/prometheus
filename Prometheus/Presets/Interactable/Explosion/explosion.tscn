@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Explosion/explosion.png" type="Texture" id=1]
+[ext_resource path="res://Presets/Interactable/Interactable.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Presets/Interactable/Explosion/explosion.gd" type="Script" id=3]
+[ext_resource path="res://Presets/Interactable/Explosion/explosion_animation.gd" type="Script" id=4]
+
+
+[node name="Sprite" type="Sprite"]
+texture = ExtResource( 1 )
+vframes = 8
+hframes = 8
+frame = 15
+script = ExtResource( 4 )
+
+[node name="Interactable" parent="." instance=ExtResource( 2 )]
+script = ExtResource( 3 )
