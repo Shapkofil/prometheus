@@ -12,7 +12,7 @@ func _ready():
 
 func execute(collisions):
 	for collision in collisions:
-		if "Cyclops" in collision.name or "Gorgona" in collision.name:
+		if "Cyclops" in collision.name or "Gorgona" in collision.name or "Centauros" in collision.name:
 			collision.queue_free()
 			GlobalVars.score += 5
 

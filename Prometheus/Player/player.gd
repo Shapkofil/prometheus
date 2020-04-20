@@ -66,6 +66,7 @@ func explode():
 	explosion.position.x = global_position.x
 	explosion.position.y = global_position.y
 	get_tree().get_root().add_child(explosion)
+	affect_fire(- max_fire + 1, 0)
 	
 func go_back_to_menu():
 	get_tree().paused = false
@@ -80,13 +81,10 @@ func affect_fire(t, e):
 	if fire == 0:
 		$DeathLayer/DeathPopup.visible = true
 		get_tree().paused = true
-	if fire == max_fire:
-		explode()
 	for sub in fire_subscribers:
 		sub.update_fire()
 
 func _physics_process(delta):
-	print(GlobalVars.score)
 	# Create forces
 	_delta = delta
 	var force = Vector2(0, GRAVITY)
@@ -94,6 +92,10 @@ func _physics_process(delta):
 	
 	if attack_cooldown > 0:
 		attack_cooldown -= 1
+	
+	if Input.is_key_pressed(KEY_E):
+		if fire == max_fire:
+			explode()
 	
 	if Input.is_action_just_pressed("action"):
 		if attack_cooldown == 0 and fire > 1:
