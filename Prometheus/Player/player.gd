@@ -83,7 +83,7 @@ func _physics_process(delta):
 		attack_cooldown -= 1
 	
 	if Input.is_action_just_pressed("action"):
-		if attack_cooldown == 0 and fire > 0:
+		if attack_cooldown == 0 and fire > 1:
 			fireball.position.x = self.position.x
 			fireball.position.y = self.position.y
 			get_tree().get_root().add_child(fireball)
