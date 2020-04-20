@@ -82,13 +82,12 @@ func generate_chunk(coords):
 #----------------------------
 
 export var spawnable = {'res://Presets/Interactable/FireCoin.tscn':.02}
-export var dynamic_spawnable = {'res://Presets/Interactable/Lightning/lightning.tscn':.02}
+export var dynamic_spawnable = {'res://Presets/Interactable/Lightning/lightning.tscn':.002}
 
 func spawn_noise(pos):
 	return platform_noise(pos)*SPAWN_INFLUENCE + rand_range(0, 1)
 	
 func _on_random_tick():
-	print("random_tick")
 	var top_left_tile = chunk_pos * CHUNK_SIZE
 	var pos
 	for x in range(CHUNK_SIZE):
