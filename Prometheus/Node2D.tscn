@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Assets/Tiles/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Player/player.tscn" type="PackedScene" id=2]
@@ -18,8 +18,14 @@
 [ext_resource path="res://Assets/Entities/CyclopsMovement/cyclops movement 1.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Entities/CyclopsMovement/cyclops movement 2.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Entities/CyclopsMovement/cyclops movement 3.png" type="Texture" id=18]
+[ext_resource path="res://Player/Mobs/centauros.gd" type="Script" id=19]
+[ext_resource path="res://Assets/Entities/centauros/centauros charging attack.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Entities/centauros/centauros prepare for attack.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Entities/centauros/centauros start of attack.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Entities/centauros/centauros already attacked.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Entities/centauros/centauros standing.png" type="Texture" id=24]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
 
 uniform float size_x=0.005;
@@ -47,8 +53,8 @@ COLOR.rgb = Chromatic_Aberration;
 //COLOR.rgb= textureLod(SCREEN_TEXTURE,uv,0.0).rgb;
 }"
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
 shader_param/size_x = 0.005
 shader_param/size_y = 0.005
 shader_param/r_offset_x = -0.2
@@ -58,7 +64,7 @@ shader_param/g_offset_y = 0.0
 shader_param/b_offset_x = 0.2
 shader_param/b_offset_y = 0.0
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": true,
@@ -66,10 +72,10 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=6]
 height = 65.5869
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
 "frames": [ ExtResource( 11 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 13 ) ],
 "loop": true,
@@ -77,12 +83,28 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=6]
-radius = 45.7896
+[sub_resource type="CapsuleShape2D" id=8]
+radius = 50.0169
 height = 13.5003
 
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 24 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 21 ), ExtResource( 22 ), ExtResource( 20 ), ExtResource( 23 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "charge-loop",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 30.545, 32.6693 )
+
 [node name="Node2D" type="Node2D"]
-material = SubResource( 2 )
+material = SubResource( 4 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -94,25 +116,37 @@ tile_data = PoolIntArray( 65526, 5, 0, 65527, 5, 1, 65528, 5, 1, 65529, 5, 1, 65
 script = ExtResource( 12 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="TileMap/Cyclops"]
-frames = SubResource( 3 )
+frames = SubResource( 5 )
 animation = "move-loop"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/Cyclops"]
 position = Vector2( -5.10712, 2.38329 )
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 
 [node name="Gorgona" type="KinematicBody2D" parent="TileMap"]
 script = ExtResource( 9 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="TileMap/Gorgona"]
 scale = Vector2( 2, 2 )
-frames = SubResource( 5 )
+frames = SubResource( 7 )
 animation = "move-loop"
 frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/Gorgona"]
-shape = SubResource( 6 )
+shape = SubResource( 8 )
+
+[node name="Centauros" type="KinematicBody2D" parent="TileMap"]
+scale = Vector2( 2, 2 )
+script = ExtResource( 19 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="TileMap/Centauros"]
+frames = SubResource( 1 )
+animation = "charge-loop"
+frame = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/Centauros"]
+shape = SubResource( 2 )
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 150, 70 )
