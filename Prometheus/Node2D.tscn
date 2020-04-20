@@ -1,12 +1,11 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Assets/Tiles/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Player/player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Presets/Interactable/Fire_coin.gd" type="Script" id=3]
+[ext_resource path="res://Presets/Interactable/FireCoin.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Presets/Interactable/Interactable.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Player/Player UI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Presets/Interactable/Mirror.gd" type="Script" id=6]
-[ext_resource path="res://Assets/Fire Bar/firebar.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Entities/mirror.png" type="Texture" id=8]
 [ext_resource path="res://UI/west_england.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://UI/QuitToMain.gd" type="Script" id=10]
@@ -57,19 +56,6 @@ shader_param/g_offset_x = 0.0
 shader_param/g_offset_y = 0.0
 shader_param/b_offset_x = 0.2
 shader_param/b_offset_y = 0.0
-
-[sub_resource type="AtlasTexture" id=3]
-flags = 4
-atlas = ExtResource( 7 )
-region = Rect2( 0, 192, 64, 64 )
-
-[sub_resource type="SpriteFrames" id=4]
-animations = [ {
-"frames": [ SubResource( 3 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
 
 [sub_resource type="DynamicFont" id=5]
 size = 40
@@ -125,12 +111,7 @@ script = ExtResource( 6 )
 [node name="Sprite" type="Sprite" parent="Mirror"]
 texture = ExtResource( 8 )
 
-[node name="Coin" parent="." instance=ExtResource( 4 )]
-position = Vector2( 263.64, 153.79 )
-script = ExtResource( 3 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Coin"]
-frames = SubResource( 4 )
+[node name="FireCoin" parent="." instance=ExtResource( 3 )]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 pause_mode = 2

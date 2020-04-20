@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Presets/Interactable/Fire_coin.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Fire Bar/firebar.png" type="Texture" id=2]
+[ext_resource path="res://Presets/Interactable/Interactable.tscn" type="PackedScene" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 192, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="FireCoin" type="AnimatedSprite"]
+position = Vector2( 263.64, 153.79 )
+frames = SubResource( 2 )
+
+[node name="Area2D" parent="." instance=ExtResource( 3 )]
+script = ExtResource( 1 )

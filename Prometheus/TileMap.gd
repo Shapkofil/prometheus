@@ -2,12 +2,13 @@ extends TileMap
 
 export var _seed = 271382
 export var CHUNK_SIZE = 64
-export var GEN_RADIUS = 2
+export var GEN_RADIUS = 1
 
 export var FLOOR_SCALE = 2.0
 export var FLOOR_TO_AIR_RATIO = .1
 export var VARIATION = 10.0
 export var VARIATION_SCALE = 20.0
+export var SPAWN_TIME = 20.0
 
 const pi = 3.14159265359
 
@@ -34,7 +35,12 @@ func _ready():
 
 var chunk_pos = Vector2(100,100)
 var raw_pos = Vector2(0,0)
-var generated = {}
+var chunk_cache = {}
+
+
+#--------------------------------
+# TERRAIN GENERATION
+#--------------------------------
 
 func remap_range(input, minInput, maxInput, minOutput, maxOutput):
 	return(input - minInput) / (maxInput - minInput) * (maxOutput - minOutput) + minOutput
@@ -47,9 +53,9 @@ func platform_noise(pos):
 
 func generate_chunk(coords):
 	# Double Generation Protection
-	if generated.has(coords):
+	if chunk_cache.has(coords):
 		return
-	generated[coords] = null
+	chunk_cache[coords] = -SPAWN_TIME
 	
 	var top_left_tile = coords * CHUNK_SIZE
 	var pos
@@ -58,8 +64,52 @@ func generate_chunk(coords):
 			pos = top_left_tile + Vector2(x, y)
 			if platform_noise(pos) < 0:
 				set_cellv(pos, 0)
-			
 	pass
+
+#----------------------------
+# SPAWNING ALGORITHM
+#----------------------------
+
+export var spawnable = {'res://Presets/Interactable/FireCoin.tscn':.01}
+
+func spawn_noise(pos):
+	return noise.get_noise_2dv(pos)
+	
+
+func spawn_at(pos):
+	var chance = rand_range(0,1)
+	var attempt = 0
+	for path in spawnable.keys():
+		attempt += spawnable[path]
+		if chance < attempt:
+			var scene = load(path)
+			var entity = scene.instance()
+			add_child(entity)
+			print('entity')
+			entity.position = map_to_world(pos, true) + cell_size * .5
+
+func spawn_in_chunk(coords, delta):
+	if delta - chunk_cache[coords] < SPAWN_TIME:
+		return
+	chunk_cache[coords] = delta
+	
+	var top_left_tile = coords * CHUNK_SIZE
+	var pos
+	for x in range(CHUNK_SIZE):
+		for y in range(CHUNK_SIZE):
+			pos = top_left_tile + Vector2(x, y)
+			if get_cellv(pos) == -1:
+				spawn_at(pos)
+	pass
+
+
+#----------------------------
+# MAIN
+#----------------------------
+
+func update_chunk(coords, delta):
+	generate_chunk(coords)
+	spawn_in_chunk(coords, delta)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -71,14 +121,8 @@ func _process(delta):
 	# Update Chunks when you step into a new one
 	if not chunk_pos == (pos / CHUNK_SIZE).floor() :
 		chunk_pos = (pos / CHUNK_SIZE).floor()
-		generate_chunk(chunk_pos + Vector2.UP)
-		generate_chunk(chunk_pos + Vector2.UP + Vector2.RIGHT)
-		generate_chunk(chunk_pos + Vector2.UP + Vector2.LEFT)
-		generate_chunk(chunk_pos + Vector2.RIGHT)
-		generate_chunk(chunk_pos + Vector2.LEFT)
-		generate_chunk(chunk_pos + Vector2.DOWN)
-		generate_chunk(chunk_pos + Vector2.DOWN + Vector2.RIGHT)
-		generate_chunk(chunk_pos + Vector2.DOWN + Vector2.LEFT)
-		generate_chunk(chunk_pos)
+		for x in range(-GEN_RADIUS,GEN_RADIUS + 1):
+			for y in range(-GEN_RADIUS,GEN_RADIUS + 1):
+				update_chunk(chunk_pos + Vector2(x,y), delta)
 	
 	
