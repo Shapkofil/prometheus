@@ -23,6 +23,8 @@ var on_air_time = 100
 var jumping = false
 var jump_delay = .0
 var on_ground_delay = .0
+var hitstun = 0
+var knockdir = Vector2(0, 0)
 
 var random_props = {}
 
@@ -46,6 +48,18 @@ var fire_subscribers = []
 func subscribe(subscriber):
 	fire_subscribers.append(subscriber)
 	
+func take_damage(lightning):
+	if hitstun == 0:
+		hitstun = 30
+		affect_fire(-1, 0)
+		take_knockback(lightning)
+	else:
+		hitstun -= 1
+	
+func take_knockback(lightning):
+		knockdir = (lightning.position - self.global_position).normalized()
+		move_and_slide(knockdir * 3000)
+
 func affect_fire(t, e):
 	fire += t;
 	max_fire += e;

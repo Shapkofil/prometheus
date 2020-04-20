@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Assets/Tiles/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Player/player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Presets/Interactable/Interactable.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Player/Player UI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Presets/Interactable/Mirror.gd" type="Script" id=6]
+[ext_resource path="res://Presets/Interactable/Lightning/lightning.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Entities/mirror.png" type="Texture" id=8]
 [ext_resource path="res://UI/west_england.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://UI/QuitToMain.gd" type="Script" id=10]
@@ -57,23 +58,23 @@ shader_param/g_offset_y = 0.0
 shader_param/b_offset_x = 0.2
 shader_param/b_offset_y = 0.0
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=3]
 size = 40
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 40
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 38
 font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 40
 font_data = ExtResource( 9 )
 
-[sub_resource type="DynamicFont" id=7]
-size = 38
-font_data = ExtResource( 9 )
-
-[sub_resource type="DynamicFont" id=8]
-size = 40
-font_data = ExtResource( 9 )
-
-[sub_resource type="SpriteFrames" id=9]
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
 "frames": [ ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": true,
@@ -81,7 +82,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=10]
+[sub_resource type="CapsuleShape2D" id=8]
 height = 65.5869
 
 [node name="Node2D" type="Node2D"]
@@ -143,7 +144,7 @@ margin_top = 300.0
 margin_right = 1080.0
 margin_bottom = 360.0
 rect_pivot_offset = Vector2( 125, 30 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 3 )
 text = "Pause menu"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -155,7 +156,7 @@ margin_top = 420.0
 margin_right = 1120.0
 margin_bottom = 490.0
 rect_pivot_offset = Vector2( 160, 35 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 4 )
 text = "Resume"
 script = ExtResource( 13 )
 __meta__ = {
@@ -167,7 +168,7 @@ margin_left = 800.0
 margin_top = 520.0
 margin_right = 1120.0
 margin_bottom = 590.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 5 )
 text = "Restart level"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -179,7 +180,7 @@ margin_top = 620.0
 margin_right = 1180.0
 margin_bottom = 690.0
 rect_pivot_offset = Vector2( 230, 35 )
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 6 )
 text = "Quit to main menu"
 script = ExtResource( 10 )
 __meta__ = {
@@ -190,12 +191,15 @@ __meta__ = {
 script = ExtResource( 12 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Enemy"]
-frames = SubResource( 9 )
+frames = SubResource( 7 )
 animation = "move-loop"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
 position = Vector2( -4.76656, 2.38329 )
-shape = SubResource( 10 )
+shape = SubResource( 8 )
+
+[node name="Sprite" parent="." instance=ExtResource( 7 )]
+position = Vector2( 452.609, 154.208 )
 [connection signal="pressed" from="CanvasLayer/PauseMenu/Resume" to="CanvasLayer" method="_on_Resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/RestartLevel" to="CanvasLayer" method="_on_RestartLevel_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/QuitToMain" to="CanvasLayer" method="_on_QuitToMain_pressed"]

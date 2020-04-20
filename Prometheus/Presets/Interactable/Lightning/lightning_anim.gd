@@ -1,4 +1,4 @@
-extends Node2D
+extends Sprite
 
 
 # Declare member variables here. Examples:
@@ -7,7 +7,6 @@ extends Node2D
 
 
 # Called when the node enters the scene tree for the first time.
-
 var _timer = null
 
 
@@ -21,10 +20,10 @@ func _ready():
 	_timer.start()
 
 func _on_Timer_timeout():
-	if $Sprite.get_frame() == 2:
-		$Sprite.set_frame(0)
+	if get_frame() == 2:
+		set_frame(0)
 	else:
-		$Sprite.set_frame($Sprite.get_frame() + 1)
+		set_frame(get_frame() + 1)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
