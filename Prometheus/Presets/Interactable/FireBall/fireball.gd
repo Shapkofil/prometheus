@@ -12,7 +12,9 @@ func _ready():
 
 func execute(collisions):
 	for collision in collisions:
-		pass
+		if collision.name == "Enemy":
+			collision.queue_free()
+			self.get_parent().queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
