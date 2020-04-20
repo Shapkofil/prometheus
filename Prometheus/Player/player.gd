@@ -15,6 +15,8 @@ export var JUMP_SPEED = 500
 export var JUMP_MAX_AIRBORNE_TIME = 0.2
 export var TIME_FLEX = .2
 
+export var DAMAGE_SKIP = .5
+
 export var SLIDE_STOP_VELOCITY = 1.0 # one pixel/second
 export var SLIDE_STOP_MIN_TRAVEL = 1.0 # one pixel
 
@@ -25,6 +27,7 @@ var jump_delay = .0
 var on_ground_delay = .0
 var hitstun = 0
 var knockdir = Vector2(0, 0)
+var _delta
 
 var random_props = {}
 
@@ -48,17 +51,17 @@ var fire_subscribers = []
 func subscribe(subscriber):
 	fire_subscribers.append(subscriber)
 	
-func take_damage(lightning):
-	if hitstun == 0:
-		hitstun = 30
+func take_damage(source, force):
+	if hitstun < 0:
+		hitstun = DAMAGE_SKIP
 		affect_fire(-1, 0)
-		take_knockback(lightning)
+		take_knockback(source, force)
 	else:
-		hitstun -= 1
+		hitstun -= _delta
 	
-func take_knockback(lightning):
-		knockdir = (lightning.position - self.global_position).normalized()
-		move_and_slide(knockdir * 3000)
+func take_knockback(source, force):
+		knockdir = (source.position - self.global_position).normalized()
+		velocity += knockdir * force
 
 func affect_fire(t, e):
 	fire += t;
@@ -68,6 +71,7 @@ func affect_fire(t, e):
 
 func _physics_process(delta):
 	# Create forces
+	_delta = delta
 	var force = Vector2(0, GRAVITY)
 
 	var walk_left = Input.is_action_pressed("ui_left")
