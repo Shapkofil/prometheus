@@ -23,10 +23,6 @@ config/icon="res://icon.png"
 
 GlobalVars="*res://UI/GlobalVars.gd"
 
-[debug]
-
-settings/fps/force_fps=60
-
 [display]
 
 window/size/width=1920

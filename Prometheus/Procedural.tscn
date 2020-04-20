@@ -12,7 +12,7 @@
 tile_set = ExtResource( 4 )
 format = 1
 script = ExtResource( 5 )
-_seed = 235451
+_seed = 21312512
 CHUNK_SIZE = 16
 FLOOR_TO_AIR_RATIO = 0.0
 VARIATION = 3.0
