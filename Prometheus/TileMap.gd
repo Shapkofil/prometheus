@@ -82,6 +82,7 @@ func generate_chunk(coords):
 #----------------------------
 
 export var spawnable = {'res://Presets/Interactable/FireCoin.tscn':.02}
+export var mobs = {"res://Player/Mobs/centauros.tscn":.02, "res://Player/Mobs/CyclopsMob.tscn":0.02, "res://Player/Mobs/Gorgona.tscn":0.02}
 export var dynamic_spawnable = {'res://Presets/Interactable/Lightning/lightning.tscn':.002}
 
 func spawn_noise(pos):
@@ -108,6 +109,8 @@ func spawn_at(pos, spawn_set):
 			var entity = scene.instance()
 			add_child(entity)
 			entity.position = map_to_world(pos, true) + cell_size * .5
+			return true
+	return false
 
 func spawn_in_chunk(coords, delta):
 	if delta - chunk_cache[coords] < SPAWN_TIME:
@@ -120,7 +123,8 @@ func spawn_in_chunk(coords, delta):
 		for y in range(CHUNK_SIZE):
 			pos = top_left_tile + Vector2(x, y)
 			if get_cellv(pos) == -1:
-				spawn_at(pos, spawnable)
+				if not spawn_at(pos, spawnable):
+				if 
 	pass
 
 

@@ -99,6 +99,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("action"):
 		if attack_cooldown == 0 and fire > 1:
+			$attack.play()
 			fireball.position.x = self.position.x
 			fireball.position.y = self.position.y
 			get_tree().get_root().add_child(fireball)
@@ -152,6 +153,7 @@ func _physics_process(delta):
 		jumping = false
 
 	if jump and jumping and on_air_time<JUMP_MAX_AIRBORNE_TIME:
+		$Jump.play()
 		velocity.y = -JUMP_SPEED
 
 	if not is_on_floor() :

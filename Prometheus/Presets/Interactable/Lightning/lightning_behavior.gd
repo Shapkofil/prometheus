@@ -45,7 +45,6 @@ func _process(delta):
 
 
 func update_seeker(delta):
-	print(scanning)
 	if not scanning:
 		return;
 	

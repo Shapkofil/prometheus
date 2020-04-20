@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/collect_coin.wav-09a1d8da4e56d4690ca4fce7ad4569ac.sample"
+
+[deps]
+
+source_file="res://Presets/Interactable/collect_coin.wav"
+dest_files=[ "res://.import/collect_coin.wav-09a1d8da4e56d4690ca4fce7ad4569ac.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

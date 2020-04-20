@@ -14,9 +14,17 @@ format = 1
 script = ExtResource( 5 )
 _seed = 21312512
 CHUNK_SIZE = 16
+GEN_RADIUS = null
+FLOOR_SCALE = null
 FLOOR_TO_AIR_RATIO = 0.0
 VARIATION = 3.0
+VARIATION_SCALE = null
+SPAWN_TIME = null
 SPAWN_INFLUENCE = 0.2
+RANDOM_TICK = null
+spawnable = null
+mobs = null
+dynamic_spawnable = null
 
 [node name="player" parent="." instance=ExtResource( 1 )]
 WALK_MAX_SPEED = 500

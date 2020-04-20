@@ -1,51 +1,56 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Player/player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Entities/prometeos_idle.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Entities/prometeos_movement.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Entities/prometeos_jump.png" type="Texture" id=4]
-[ext_resource path="res://Player/ouch.wav" type="AudioStream" id=5]
+[ext_resource path="res://Player/huh.wav" type="AudioStream" id=5]
 [ext_resource path="res://Player/PauseLayer.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Player/DeathLayer.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Player/hah_attack.wav" type="AudioStream" id=8]
+[ext_resource path="res://Player/jump.wav" type="AudioStream" id=9]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 256, 0, 64, 64 )
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=6]
 flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 320, 0, 64, 64 )
+atlas = ExtResource( 3 )
+region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=7]
 flags = 4
 atlas = ExtResource( 3 )
+
 region = Rect2( 0, 0, 64, 64 )
+
 
 [sub_resource type="AtlasTexture" id=8]
 flags = 4
 atlas = ExtResource( 3 )
+
 region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=9]
@@ -78,21 +83,26 @@ flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 192, 0, 64, 64 )
 
+
 [sub_resource type="SpriteFrames" id=15]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
-"name": "idle-loop",
+"name": "jump-loop",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
 "name": "move-loop",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
 "loop": true,
+<<<<<<< HEAD
 "name": "jump-loop",
+=======
+"name": "idle-loop",
+>>>>>>> 7d18e39c0a802807708e0129e29d08ff7bc104de
 "speed": 5.0
 } ]
 
@@ -117,8 +127,13 @@ shape = SubResource( 16 )
 
 [node name="ouch" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
-volume_db = 10.0
 
 [node name="PauseLayer" parent="." instance=ExtResource( 6 )]
 
 [node name="DeathLayer" parent="." instance=ExtResource( 7 )]
+
+[node name="attack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
