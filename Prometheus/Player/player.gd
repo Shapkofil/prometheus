@@ -93,7 +93,7 @@ func _physics_process(delta):
 	if attack_cooldown > 0:
 		attack_cooldown -= 1
 	
-	if Input.is_key_pressed(KEY_E):
+	if Input.is_action_just_pressed("ult"):
 		if fire == max_fire:
 			explode()
 	

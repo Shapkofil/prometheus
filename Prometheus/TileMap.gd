@@ -73,7 +73,7 @@ func generate_chunk(coords):
 		for y in range(CHUNK_SIZE):
 			pos = top_left_tile + Vector2(x, y)
 			if platform_noise(pos) < 0:
-				set_cellv(pos, tile_set.find_tile_by_name('GrassSet'))
+				set_cellv(pos, tile_set.find_tile_by_name('Temple'))
 	update_bitmask_region(coords*16, (coords+Vector2(1,1))*16)
 	pass
 
