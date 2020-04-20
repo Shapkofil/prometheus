@@ -28,6 +28,7 @@ var on_ground_delay = .0
 var hitstun = 0
 var knockdir = Vector2(0, 0)
 var _delta
+var attack_cooldown = 0
 
 var random_props = {}
 
@@ -37,7 +38,7 @@ var prev_jump_pressed = false
 export var fire = 5
 export var max_fire = 6
 
-
+onready var fireballPacked = preload("res://Presets/Interactable/FireBall/fireball.tscn")
 
 func _ready():
 	var positionX = GlobalVars.playerSavedPosition[0]
@@ -56,6 +57,7 @@ func take_damage(source, force):
 		hitstun = DAMAGE_SKIP
 		affect_fire(-1, 0)
 		take_knockback(source, force)
+		$ouch.play()
 	else:
 		hitstun -= _delta
 	
@@ -66,6 +68,8 @@ func take_knockback(source, force):
 func affect_fire(t, e):
 	fire += t;
 	max_fire += e;
+	if fire < 0:
+		fire = 0
 	for sub in fire_subscribers:
 		sub.update_fire()
 
@@ -73,6 +77,22 @@ func _physics_process(delta):
 	# Create forces
 	_delta = delta
 	var force = Vector2(0, GRAVITY)
+	var fireball = fireballPacked.instance()
+	
+	if attack_cooldown > 0:
+		attack_cooldown -= 1
+	
+	if Input.is_key_pressed(KEY_K):
+		if attack_cooldown == 0 and fire > 0:
+			fireball.position.x = self.position.x
+			fireball.position.y = self.position.y
+			get_tree().get_root().add_child(fireball)
+			if $AnimatedSprite.flip_h == false:
+				fireball.flip_h = true
+			else:
+				fireball.flip_h = false
+			attack_cooldown = 30
+			affect_fire(-1, 0)
 
 	var walk_left = Input.is_action_pressed("ui_left")
 	var walk_right = Input.is_action_pressed("ui_right")
