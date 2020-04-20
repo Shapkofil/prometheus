@@ -26,5 +26,5 @@ func _on_RestartLevel_pressed():
 
 
 func _on_QuitToMain_pressed():
-	get_parent().go_back_to_menu()
+	get_parent().get_child(1).go_back_to_menu()
 

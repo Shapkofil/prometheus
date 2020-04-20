@@ -6,7 +6,6 @@
 [ext_resource path="res://UI/west_england.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Player/PauseLayer.gd" type="Script" id=5]
 
-
 [sub_resource type="DynamicFont" id=1]
 size = 40
 font_data = ExtResource( 4 )

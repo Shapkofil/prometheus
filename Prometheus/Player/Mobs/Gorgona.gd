@@ -3,7 +3,7 @@ extends KinematicBody2D
 var direction = false
 
 func _ready():
-	position = Vector2(-30, 0)
+	position = Vector2(-130, 0)
 
 export var GRAVITY = 700.0 # pixels/second/second
 
@@ -32,15 +32,15 @@ func _physics_process(delta):
 		position.x -= 1
 		$AnimatedSprite.play("move-loop")
 		$AnimatedSprite.flip_h = false
-		checksForDirection = position.x - 20
+		checksForDirection = position.x - 50
 	
 	elif !direction:
 		position.x += 1
 		$AnimatedSprite.play("move-loop")
 		$AnimatedSprite.flip_h = true
-		checksForDirection = position.x + 20
+		checksForDirection = position.x + 50
 	
-	var positionOfEnemyOnGround = Vector2(checksForDirection, position.y + 64)
+	var positionOfEnemyOnGround = Vector2(checksForDirection, position.y + 128)
 	var positionOfEnemyBeforeWall = Vector2(checksForDirection, position.y)
 	var tileOnGround = get_tree().get_current_scene().get_node("TileMap").get_cellv(get_tree().get_current_scene().get_node("TileMap").world_to_map(positionOfEnemyOnGround))
 	var tileBeforWall = get_tree().get_current_scene().get_node("TileMap").get_cellv(get_tree().get_current_scene().get_node("TileMap").world_to_map(positionOfEnemyBeforeWall))
