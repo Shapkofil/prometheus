@@ -24,7 +24,7 @@ float fbm(vec2 n) {
     for (int i = 0; i < 7; i++) {
         total += noise(n) * amplitude;
         n += n;
-        amplitude *= 0.3;
+        amplitude *= 0.5;
     }
     return total;
 }

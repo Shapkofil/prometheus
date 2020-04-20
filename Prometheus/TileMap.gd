@@ -8,8 +8,9 @@ export var FLOOR_SCALE = 2.0
 export var FLOOR_TO_AIR_RATIO = .1
 export var VARIATION = 10.0
 export var VARIATION_SCALE = 20.0
-export var SPAWN_TIME = 20.0
+export var SPAWN_TIME = 2.0
 export var SPAWN_INFLUENCE = .01
+export var RANDOM_TICK = 2.0
 
 const pi = 3.14159265359
 
@@ -20,7 +21,7 @@ const pi = 3.14159265359
 var player
 
 var noise = OpenSimplexNoise.new()
-
+var _timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,6 +32,14 @@ func _ready():
 	noise.octaves = 4
 	noise.period = 20.0
 	noise.persistence = 0.8
+	
+	# Random Tick
+	_timer = Timer.new()
+	_timer.set_one_shot(false)
+	add_child(_timer)
+	_timer.connect("timeout", self, "_on_random_tick")
+	_timer.set_wait_time(randf()*RANDOM_TICK)
+	_timer.start()
 
 	pass
 
@@ -73,16 +82,28 @@ func generate_chunk(coords):
 #----------------------------
 
 export var spawnable = {'res://Presets/Interactable/FireCoin.tscn':.02}
+export var dynamic_spawnable = {'res://Presets/Interactable/Lightning/lightning.tscn':.02}
 
 func spawn_noise(pos):
 	return platform_noise(pos)*SPAWN_INFLUENCE + rand_range(0, 1)
 	
+func _on_random_tick():
+	print("random_tick")
+	var top_left_tile = chunk_pos * CHUNK_SIZE
+	var pos
+	for x in range(CHUNK_SIZE):
+		for y in range(CHUNK_SIZE):
+			pos = top_left_tile + Vector2(x, y)
+			if get_cellv(pos) == -1:
+				spawn_at(pos, dynamic_spawnable)
+	_timer.set_wait_time(randf()*RANDOM_TICK)
+	pass
 
-func spawn_at(pos):
+func spawn_at(pos, spawn_set):
 	var chance = spawn_noise(pos)
 	var attempt = 0
-	for path in spawnable.keys():
-		attempt += spawnable[path]
+	for path in spawn_set.keys():
+		attempt += spawn_set[path]
 		if chance < attempt:
 			var scene = load(path)
 			var entity = scene.instance()
@@ -100,7 +121,7 @@ func spawn_in_chunk(coords, delta):
 		for y in range(CHUNK_SIZE):
 			pos = top_left_tile + Vector2(x, y)
 			if get_cellv(pos) == -1:
-				spawn_at(pos)
+				spawn_at(pos, spawnable)
 	pass
 
 
