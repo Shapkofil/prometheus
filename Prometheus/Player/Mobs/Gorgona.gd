@@ -21,7 +21,42 @@ var random_props = {}
 
 var checksForDirection
 
+
+export var fire = 5
+export var max_fire = 6
+var _delta
+var hitstun = 0
+export var DAMAGE_SKIP = .5
+var fire_subscribers = []
+var knockdir = Vector2(0, 0)
+export var knockback_force = 100
+
+func take_damage(source, force):
+	if hitstun < 0:
+		hitstun = DAMAGE_SKIP
+		affect_fire(-1, 0)
+		take_knockback(source, force)
+		get_parent().get_parent().get_child(1).get_child(2).play()
+	else:
+		hitstun -= _delta
+		
+func affect_fire(t, e):
+	fire += t;
+	max_fire += e;
+	if fire == 0:
+		get_parent().get_parent().get_child(1).get_child(4).get_child(0).visible = true
+		get_tree().paused = true
+	for sub in fire_subscribers:
+		sub.update_fire()
+
+func take_knockback(source, force):
+		knockdir = (source.position - self.global_position).normalized()
+		velocity += knockdir * force
+
+
+
 func _physics_process(delta):
+	_delta = delta
 	var force = Vector2(0,GRAVITY)
 	
 	velocity += force * delta
@@ -46,3 +81,11 @@ func _physics_process(delta):
 	var tileBeforWall = get_tree().get_current_scene().get_node("TileMap").get_cellv(get_tree().get_current_scene().get_node("TileMap").world_to_map(positionOfEnemyBeforeWall))
 	if tileOnGround == get_parent().INVALID_CELL or tileBeforWall != get_parent().INVALID_CELL: 
 		direction = not direction
+		
+	var movement = Vector2(-1, 0)
+	var collisions = move_and_collide(movement * delta)
+	if collisions != null:
+		if collisions.collider_id == get_parent().get_parent().get_child(1).get_instance_id():
+			take_damage(get_parent().get_parent().get_child(1), knockback_force)
+	
+

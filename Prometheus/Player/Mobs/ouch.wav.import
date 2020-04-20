@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ouch.wav-bb64b8d5a0b5a966443d5be19ff1e1d1.sample"
+
+[deps]
+
+source_file="res://Player/Mobs/ouch.wav"
+dest_files=[ "res://.import/ouch.wav-bb64b8d5a0b5a966443d5be19ff1e1d1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
