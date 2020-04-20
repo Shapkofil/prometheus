@@ -1,7 +1,5 @@
 extends KinematicBody2D
 
-# This demo shows how to build a kinematic controller.
-
 # Member variables
 export var GRAVITY = 700.0 # pixels/second/second
 
@@ -68,6 +66,13 @@ func explode():
 	explosion.position.x = global_position.x
 	explosion.position.y = global_position.y
 	get_tree().get_root().add_child(explosion)
+	
+func go_back_to_menu():
+	get_tree().paused = false
+	for child in get_tree().get_root().get_children():
+		if "fireball" in child.get_name() or "lightning" in child.get_name():
+			child.queue_free()
+	get_tree().change_scene("res://UI/MainMenu.tscn")
 
 func affect_fire(t, e):
 	fire += t;
@@ -81,6 +86,7 @@ func affect_fire(t, e):
 		sub.update_fire()
 
 func _physics_process(delta):
+	print(GlobalVars.score)
 	# Create forces
 	_delta = delta
 	var force = Vector2(0, GRAVITY)
