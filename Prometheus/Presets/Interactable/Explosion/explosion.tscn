@@ -5,8 +5,8 @@
 [ext_resource path="res://Presets/Interactable/Explosion/explosion.gd" type="Script" id=3]
 [ext_resource path="res://Presets/Interactable/Explosion/explosion_animation.gd" type="Script" id=4]
 
-
 [node name="Sprite" type="Sprite"]
+scale = Vector2( 5, 5 )
 texture = ExtResource( 1 )
 vframes = 8
 hframes = 8
@@ -14,4 +14,5 @@ frame = 15
 script = ExtResource( 4 )
 
 [node name="Interactable" parent="." instance=ExtResource( 2 )]
+scale = Vector2( 8, 6 )
 script = ExtResource( 3 )

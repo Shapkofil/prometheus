@@ -39,11 +39,9 @@ export var fire = 5
 export var max_fire = 6
 
 onready var fireballPacked = preload("res://Presets/Interactable/FireBall/fireball.tscn")
+onready var explosionPacked = preload("res://Presets/Interactable/Explosion/explosion.tscn")
 
 func _ready():
-	var positionX = GlobalVars.playerSavedPosition[0]
-	var positionY = GlobalVars.playerSavedPosition[1]
-	position = Vector2(positionX, positionY)
 	GlobalVars.lastScene = "res://Node2D.tscn"
 	get_tree().paused = false
 
@@ -65,11 +63,19 @@ func take_knockback(source, force):
 		knockdir = (source.position - self.global_position).normalized()
 		velocity += knockdir * force
 
+func explode():
+	var explosion = explosionPacked.instance()
+	explosion.position.x = global_position.x
+	explosion.position.y = global_position.y
+	get_tree().get_root().add_child(explosion)
+
 func affect_fire(t, e):
 	fire += t;
 	max_fire += e;
 	if fire < 0:
 		fire = 0
+	if fire == max_fire:
+		explode()
 	for sub in fire_subscribers:
 		sub.update_fire()
 
@@ -149,7 +155,6 @@ func _physics_process(delta):
 	
 	on_air_time += delta
 	
-	GlobalVars.playerSavedPosition = get_position()
 	
 	
 func delays(jump, ground, delta):

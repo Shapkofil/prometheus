@@ -8,11 +8,9 @@ extends "res://Presets/Interactable/Interactable.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if GlobalVars.hasMirror == true:
-		visible = false
+	pass
 
 func execute(collisions):
-	GlobalVars.hasMirror = true
 	for collision in collisions:
 		if collision.name == "player":
 			collision.random_props['hasMirror'] = true

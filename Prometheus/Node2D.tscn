@@ -106,11 +106,10 @@ position = Vector2( -5.10712, 2.38329 )
 shape = SubResource( 4 )
 
 [node name="player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 149.238, 69.0661 )
+position = Vector2( 150, 70 )
 GRAVITY = 1000.0
 JUMP_MAX_AIRBORNE_TIME = 0.5
 DAMAGE_SKIP = 0.2
-fire = 4
 
 [node name="Camera2D" parent="player" instance=ExtResource( 5 )]
 

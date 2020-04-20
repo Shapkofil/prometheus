@@ -19,19 +19,14 @@ func _on_Resume_pressed():
 
 
 func _on_RestartLevel_pressed():
-	GlobalVars.hasCoin = false
-	GlobalVars.hasMirror = false
-	GlobalVars.playerSavedPosition = [100, 200]
+	
 	get_tree().paused = false
 # warning-ignore:return_value_discarded
-	get_tree().change_scene("res://Node2D.tscn")
+	get_tree().reload_current_scene()
 
 
 func _on_QuitToMain_pressed():
 	get_tree().paused = false
-	GlobalVars.hasCoin = false
-	GlobalVars.hasMirror = false
-	GlobalVars.playerSavedPosition = [100, 0]
 # warning-ignore:return_value_discarded
 	get_tree().change_scene("res://UI/MainMenu.tscn")
 

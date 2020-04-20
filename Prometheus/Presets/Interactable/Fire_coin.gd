@@ -8,11 +8,9 @@ extends "res://Presets/Interactable/Interactable.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if GlobalVars.hasCoin == true:
-		visible = false
+	pass
 
 func execute(collisions):
-	GlobalVars.hasCoin = true
 	for collision in collisions:
 		if collision.name == "player":
 			collision.affect_fire(1,0)
