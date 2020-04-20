@@ -4,7 +4,7 @@ var direction = false
 
 func _ready():
 	position = Vector2(-400, 0)
-	get_parent().get_parent().get_child(1).subscribe(self)
+#	get_parent().get_parent().get_child(1).subscribe(self)
 
 export var GRAVITY = 700.0 # pixels/second/second
 
