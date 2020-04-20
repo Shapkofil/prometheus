@@ -1,19 +1,24 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Presets/Interactable/Interactable.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Presets/Interactable/Lightning/lightning_anim.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Lightning/lightning.png" type="Texture" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://Presets/Interactable/Lightning/lightning.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Lightning/lightning_sound.wav" type="AudioStream" id=5]
+[ext_resource path="res://Shaders/lightning.shader" type="Shader" id=6]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 6 )
+shader_param/resolution = Vector2( 1, 1 )
 
 [node name="Sprite" type="Sprite"]
+material = SubResource( 1 )
+rotation = 1.5708
 texture = ExtResource( 3 )
-hframes = 3
-frame = 2
 script = ExtResource( 2 )
 
 [node name="Interactable" parent="." instance=ExtResource( 1 )]
-scale = Vector2( 2, 5.5 )
+scale = Vector2( 1, 0.5 )
 script = ExtResource( 4 )
 knockback_force = 1000
 
