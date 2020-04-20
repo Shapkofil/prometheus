@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Assets/Tiles/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Player/player.tscn" type="PackedScene" id=2]
@@ -18,8 +18,9 @@
 [ext_resource path="res://Assets/Entities/CyclopsMovement/cyclops movement 1.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Entities/CyclopsMovement/cyclops movement 2.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Entities/CyclopsMovement/cyclops movement 3.png" type="Texture" id=18]
+[ext_resource path="res://CanvasLayer2.gd" type="Script" id=19]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=4]
 code = "shader_type canvas_item;
 
 uniform float size_x=0.005;
@@ -47,8 +48,8 @@ COLOR.rgb = Chromatic_Aberration;
 //COLOR.rgb= textureLod(SCREEN_TEXTURE,uv,0.0).rgb;
 }"
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
 shader_param/size_x = 0.005
 shader_param/size_y = 0.005
 shader_param/r_offset_x = -0.2
@@ -58,7 +59,7 @@ shader_param/g_offset_y = 0.0
 shader_param/b_offset_x = 0.2
 shader_param/b_offset_y = 0.0
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
 "frames": [ ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": true,
@@ -66,27 +67,39 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=7]
 height = 65.5869
-
-[sub_resource type="DynamicFont" id=5]
-size = 40
-font_data = ExtResource( 9 )
-
-[sub_resource type="DynamicFont" id=6]
-size = 40
-font_data = ExtResource( 9 )
-
-[sub_resource type="DynamicFont" id=7]
-size = 38
-font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=8]
 size = 40
 font_data = ExtResource( 9 )
 
+[sub_resource type="DynamicFont" id=9]
+size = 40
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 38
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 40
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+font_data = ExtResource( 9 )
+
 [node name="Node2D" type="Node2D"]
-material = SubResource( 2 )
+material = SubResource( 5 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -98,12 +111,12 @@ tile_data = PoolIntArray( 65526, 5, 0, 65527, 5, 1, 65528, 5, 1, 65529, 5, 1, 65
 script = ExtResource( 12 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="TileMap/Enemy"]
-frames = SubResource( 3 )
+frames = SubResource( 6 )
 animation = "move-loop"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/Enemy"]
 position = Vector2( -5.10712, 2.38329 )
-shape = SubResource( 4 )
+shape = SubResource( 7 )
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 150, 70 )
@@ -154,7 +167,7 @@ margin_top = 300.0
 margin_right = 1080.0
 margin_bottom = 360.0
 rect_pivot_offset = Vector2( 125, 30 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 8 )
 text = "Pause menu"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -166,7 +179,7 @@ margin_top = 420.0
 margin_right = 1120.0
 margin_bottom = 490.0
 rect_pivot_offset = Vector2( 160, 35 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 9 )
 text = "Resume"
 script = ExtResource( 13 )
 __meta__ = {
@@ -178,7 +191,7 @@ margin_left = 800.0
 margin_top = 520.0
 margin_right = 1120.0
 margin_bottom = 590.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 10 )
 text = "Restart level"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -190,7 +203,7 @@ margin_top = 620.0
 margin_right = 1180.0
 margin_bottom = 690.0
 rect_pivot_offset = Vector2( 230, 35 )
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 11 )
 text = "Quit to main menu"
 script = ExtResource( 10 )
 __meta__ = {
@@ -199,6 +212,70 @@ __meta__ = {
 
 [node name="Sprite" parent="." instance=ExtResource( 7 )]
 position = Vector2( 452.609, 154.208 )
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+pause_mode = 2
+script = ExtResource( 19 )
+
+[node name="DeathPopup" type="Control" parent="CanvasLayer2"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1.948
+margin_bottom = -1.948
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2/DeathPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.313726 )
+
+[node name="Label" type="Label" parent="CanvasLayer2/DeathPopup"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -615.0
+margin_top = 200.0
+margin_right = 615.0
+margin_bottom = 240.0
+custom_fonts/font = SubResource( 1 )
+text = "You lost the precious fire! Now choose your next moves."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Restart" type="Button" parent="CanvasLayer2/DeathPopup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -50.0
+margin_right = 150.0
+margin_bottom = 50.0
+custom_fonts/font = SubResource( 2 )
+text = "Try again"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="CanvasLayer2/DeathPopup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = 110.0
+margin_right = 250.0
+margin_bottom = 210.0
+custom_fonts/font = SubResource( 3 )
+text = "Quit to main menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="CanvasLayer/PauseMenu/Resume" to="CanvasLayer" method="_on_Resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/RestartLevel" to="CanvasLayer" method="_on_RestartLevel_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/QuitToMain" to="CanvasLayer" method="_on_QuitToMain_pressed"]
+[connection signal="pressed" from="CanvasLayer2/DeathPopup/Restart" to="CanvasLayer2" method="_on_Restart_pressed"]
+[connection signal="pressed" from="CanvasLayer2/DeathPopup/Quit" to="CanvasLayer2" method="_on_Quit_pressed"]

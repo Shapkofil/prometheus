@@ -72,8 +72,9 @@ func explode():
 func affect_fire(t, e):
 	fire += t;
 	max_fire += e;
-	if fire < 0:
-		fire = 0
+	if fire == 0:
+		get_parent().get_child(6).get_child(0).visible = true
+		get_tree().paused = true
 	if fire == max_fire:
 		explode()
 	for sub in fire_subscribers:
