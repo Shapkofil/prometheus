@@ -36,11 +36,14 @@ var prev_jump_pressed = false
 export var fire = 5
 export var max_fire = 6
 
+
+var audio
 onready var fireballPacked = preload("res://Presets/Interactable/FireBall/fireball.tscn")
 onready var explosionPacked = preload("res://Presets/Interactable/Explosion/explosion.tscn")
 
 func _ready():
 	GlobalVars.lastScene = "res://Node2D.tscn"
+	audio = get_node("AudioPlayer")
 	get_tree().paused = false
 
 var fire_subscribers = []
@@ -53,7 +56,7 @@ func take_damage(source, force):
 		hitstun = DAMAGE_SKIP
 		affect_fire(-1, 0)
 		take_knockback(source, force)
-		$ouch.play()
+		audio.play_sample("ouch")
 	else:
 		hitstun -= _delta
 	
@@ -99,7 +102,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("action"):
 		if attack_cooldown == 0 and fire > 1:
-			$attack.play()
+			audio.play_sample("hah_attack")
 			fireball.position.x = self.position.x
 			fireball.position.y = self.position.y
 			get_tree().get_root().add_child(fireball)
@@ -126,8 +129,16 @@ func _physics_process(delta):
 		if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
 			force.x += WALK_FORCE
 			stop = false
-			$AnimatedSprite.play("move-loop")
-			$AnimatedSprite.flip_h = true
+		$AnimatedSprite.play("move-loop")
+		$AnimatedSprite.flip_h = true
+
+		
+	elif walk_right:
+		if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
+			force.x += WALK_FORCE
+			stop = false
+		$AnimatedSprite.play("move-loop")
+		$AnimatedSprite.flip_h = true
 
 	if stop:
 		
@@ -153,7 +164,7 @@ func _physics_process(delta):
 		jumping = false
 
 	if jump and jumping and on_air_time<JUMP_MAX_AIRBORNE_TIME:
-		$Jump.play()
+		audio.play_sample("jump")
 		velocity.y = -JUMP_SPEED
 
 	if not is_on_floor() :
@@ -165,8 +176,7 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 	
 	on_air_time += delta
-	
-	
+
 	
 func delays(jump, ground, delta):
 	jump_delay += delta

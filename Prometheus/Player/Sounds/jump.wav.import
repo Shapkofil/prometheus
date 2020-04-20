@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/hah_attack.wav-9d60f28ee0889d8bf1339fa478acf7ff.sample"
+path="res://.import/jump.wav-492325164f0b99262945b599ab7b3034.sample"
 
 [deps]
 
-source_file="res://Player/hah_attack.wav"
-dest_files=[ "res://.import/hah_attack.wav-9d60f28ee0889d8bf1339fa478acf7ff.sample" ]
+source_file="res://Player/Sounds/jump.wav"
+dest_files=[ "res://.import/jump.wav-492325164f0b99262945b599ab7b3034.sample" ]
 
 [params]
 

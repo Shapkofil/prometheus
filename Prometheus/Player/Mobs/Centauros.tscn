@@ -5,9 +5,9 @@
 [ext_resource path="res://Assets/Entities/centauros/centauros standing.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Entities/centauros/centauros prepare for attack.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Entities/centauros/centauros charging attack.png" type="Texture" id=5]
-[ext_resource path="res://Player/Mobs/centauros.gd" type="Script" id=6]
+[ext_resource path="res://Player/Mobs/Mob.gd" type="Script" id=6]
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
@@ -20,17 +20,19 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 30.545, 32.6693 )
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 9.76526, 25.0013 )
 
 [node name="Centauros" type="KinematicBody2D"]
 scale = Vector2( 2, 2 )
 script = ExtResource( 6 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 7 )
+position = Vector2( 13.9848, -7.53028 )
+frames = SubResource( 1 )
 animation = "charge-loop"
 frame = 4
+playing = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 8 )
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )

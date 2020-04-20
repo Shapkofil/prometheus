@@ -82,7 +82,7 @@ func generate_chunk(coords):
 #----------------------------
 
 export var spawnable = {'res://Presets/Interactable/FireCoin.tscn':.02}
-export var mobs = {"res://Player/Mobs/centauros.tscn":.02, "res://Player/Mobs/CyclopsMob.tscn":0.02, "res://Player/Mobs/Gorgona.tscn":0.02}
+export var mobs = {"res://Player/Mobs/Centauros.tscn":.02, "res://Player/Mobs/Cyclops.tscn":0.02, "res://Player/Mobs/Gorgona.tscn":0.02}
 export var dynamic_spawnable = {'res://Presets/Interactable/Lightning/lightning.tscn':.002}
 
 func spawn_noise(pos):
@@ -112,6 +112,17 @@ func spawn_at(pos, spawn_set):
 			return true
 	return false
 
+func spawn_conditions(pos):
+	if get_cellv(pos + Vector2.DOWN) == -1:
+		return false
+	if get_cellv(pos + Vector2.DOWN + Vector2.LEFT) == -1:
+		return false
+	if get_cellv(pos + Vector2.DOWN + Vector2.RIGHT) == -1:
+		return false
+		
+	return true
+	
+
 func spawn_in_chunk(coords, delta):
 	if delta - chunk_cache[coords] < SPAWN_TIME:
 		return
@@ -124,7 +135,8 @@ func spawn_in_chunk(coords, delta):
 			pos = top_left_tile + Vector2(x, y)
 			if get_cellv(pos) == -1:
 				if not spawn_at(pos, spawnable):
-				if 
+					if spawn_conditions(pos):
+						spawn_at(pos, mobs)
 	pass
 
 
