@@ -6,7 +6,7 @@
 [ext_resource path="res://Presets/Interactable/Lightning/lightning.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Lightning/lightning_sound.wav" type="AudioStream" id=5]
 
-[node name="Sprite" type="Sprite"]
+[node name="lightning" type="Sprite"]
 texture = ExtResource( 3 )
 hframes = 3
 frame = 2
