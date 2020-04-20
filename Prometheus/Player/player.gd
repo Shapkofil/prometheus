@@ -82,7 +82,7 @@ func _physics_process(delta):
 	if attack_cooldown > 0:
 		attack_cooldown -= 1
 	
-	if Input.is_key_pressed(KEY_K):
+	if Input.is_action_just_pressed("action"):
 		if attack_cooldown == 0 and fire > 0:
 			fireball.position.x = self.position.x
 			fireball.position.y = self.position.y
