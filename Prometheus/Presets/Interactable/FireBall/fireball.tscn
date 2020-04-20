@@ -5,7 +5,7 @@
 [ext_resource path="res://Presets/Interactable/FireBall/fireball.gd" type="Script" id=3]
 [ext_resource path="res://Presets/Interactable/FireBall/fireball_movement.gd" type="Script" id=4]
 
-[node name="Sprite" type="Sprite"]
+[node name="fireball" type="Sprite"]
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 1 )
 script = ExtResource( 4 )

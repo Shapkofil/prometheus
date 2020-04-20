@@ -28,8 +28,10 @@ func _on_RestartLevel_pressed():
 func _on_QuitToMain_pressed():
 	get_tree().paused = false
 # warning-ignore:return_value_discarded
-	#for child in get_tree().get_root().get_children():
-		#child.queue_free()
+	for child in get_tree().get_root().get_children():
+		print(child.get_name())
+		if "fireball" in child.get_name() or "lightning" in child.get_name():
+			child.queue_free()
 	# get_tree().get_root().free()
 	get_tree().change_scene("res://UI/MainMenu.tscn")
 
