@@ -5,18 +5,16 @@ extends "res://Presets/Interactable/Interactable.gd"
 # var a = 2
 # var b = "text"
 
+export var knockback_force = 300
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if GlobalVars.hasCoin == true:
-		visible = false
-
+	pass
+	
 func execute(collisions):
-	GlobalVars.hasCoin = true
 	for collision in collisions:
 		if collision.name == "player":
-			collision.affect_fire(1,0)
-			get_parent().queue_free()
+			collision.take_damage(self.get_child(0), knockback_force)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
