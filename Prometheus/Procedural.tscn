@@ -16,6 +16,7 @@ _seed = 235451
 CHUNK_SIZE = 16
 FLOOR_TO_AIR_RATIO = 0.0
 VARIATION = 3.0
+SPAWN_INFLUENCE = 0.2
 
 [node name="player" parent="." instance=ExtResource( 1 )]
 WALK_MAX_SPEED = 500

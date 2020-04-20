@@ -9,6 +9,7 @@ export var FLOOR_TO_AIR_RATIO = .1
 export var VARIATION = 10.0
 export var VARIATION_SCALE = 20.0
 export var SPAWN_TIME = 20.0
+export var SPAWN_INFLUENCE = .01
 
 const pi = 3.14159265359
 
@@ -70,14 +71,14 @@ func generate_chunk(coords):
 # SPAWNING ALGORITHM
 #----------------------------
 
-export var spawnable = {'res://Presets/Interactable/FireCoin.tscn':.01}
+export var spawnable = {'res://Presets/Interactable/FireCoin.tscn':.02}
 
 func spawn_noise(pos):
-	return noise.get_noise_2dv(pos)
+	return platform_noise(pos)*SPAWN_INFLUENCE + rand_range(0, 1)
 	
 
 func spawn_at(pos):
-	var chance = rand_range(0,1)
+	var chance = spawn_noise(pos)
 	var attempt = 0
 	for path in spawnable.keys():
 		attempt += spawnable[path]
@@ -85,7 +86,6 @@ func spawn_at(pos):
 			var scene = load(path)
 			var entity = scene.instance()
 			add_child(entity)
-			print('entity')
 			entity.position = map_to_world(pos, true) + cell_size * .5
 
 func spawn_in_chunk(coords, delta):
