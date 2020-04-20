@@ -73,7 +73,7 @@ func affect_fire(t, e):
 	fire += t;
 	max_fire += e;
 	if fire == 0:
-		get_parent().find_node("CanvasLayer2").find_node("DeathPopup").visible = true
+		$DeathLayer/DeathPopup.visible = true
 		get_tree().paused = true
 	if fire == max_fire:
 		explode()
