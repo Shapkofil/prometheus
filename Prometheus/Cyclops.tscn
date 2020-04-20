@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Player/Mobs/CyclopsMob.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Entities/CyclopsMovement/cyclops movement 1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Entities/CyclopsMovement/cyclops movement 2.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Entities/CyclopsMovement/cyclops movement 3.png" type="Texture" id=4]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "move-loop",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=4]
+height = 65.5869
+
+[node name="Cyclops" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 3 )
+animation = "move-loop"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -5.10712, 2.38329 )
+shape = SubResource( 4 )

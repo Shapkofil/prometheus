@@ -9,18 +9,7 @@
 [ext_resource path="res://Presets/Interactable/Lightning/warning.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Presets/Interactable/Lightning/lightning_behavior.gd" type="Script" id=8]
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 6 )
-shader_param/resolution = Vector2( 1, 1 )
 
-[node name="Ligthing" type="Node2D"]
-script = ExtResource( 8 )
-DELAY = 0.7
-TIMESTEP = 0.01
-
-[node name="Visual" type="Sprite" parent="."]
-material = SubResource( 1 )
-rotation = 1.5708
 texture = ExtResource( 3 )
 script = ExtResource( 2 )
 

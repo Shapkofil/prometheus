@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/centauros burning.png-11cc152d1fd9311e718964f62dc54bf0.stex"
+path="res://.import/Walk 2 gorgona.png-f703069d098568245a834142e88dc225.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Entities/centauros/centauros burning.png"
-dest_files=[ "res://.import/centauros burning.png-11cc152d1fd9311e718964f62dc54bf0.stex" ]
+source_file="res://Assets/Entities/GORGONA/Walk 2 gorgona.png"
+dest_files=[ "res://.import/Walk 2 gorgona.png-f703069d098568245a834142e88dc225.stex" ]
 
 [params]
 

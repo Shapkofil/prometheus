@@ -1,7 +1,5 @@
 extends KinematicBody2D
 
-# This demo shows how to build a kinematic controller.
-
 # Member variables
 export var GRAVITY = 700.0 # pixels/second/second
 
@@ -39,11 +37,9 @@ export var fire = 5
 export var max_fire = 6
 
 onready var fireballPacked = preload("res://Presets/Interactable/FireBall/fireball.tscn")
+onready var explosionPacked = preload("res://Presets/Interactable/Explosion/explosion.tscn")
 
 func _ready():
-	var positionX = GlobalVars.playerSavedPosition[0]
-	var positionY = GlobalVars.playerSavedPosition[1]
-	position = Vector2(positionX, positionY)
 	GlobalVars.lastScene = "res://Node2D.tscn"
 	get_tree().paused = false
 
@@ -65,11 +61,26 @@ func take_knockback(source, force):
 		knockdir = (source.position - self.global_position).normalized()
 		velocity += knockdir * force
 
+func explode():
+	var explosion = explosionPacked.instance()
+	explosion.position.x = global_position.x
+	explosion.position.y = global_position.y
+	get_tree().get_root().add_child(explosion)
+	affect_fire(- max_fire + 1, 0)
+	
+func go_back_to_menu():
+	get_tree().paused = false
+	for child in get_tree().get_root().get_children():
+		if "fireball" in child.get_name() or "lightning" in child.get_name():
+			child.queue_free()
+	get_tree().change_scene("res://UI/MainMenu.tscn")
+
 func affect_fire(t, e):
 	fire += t;
 	max_fire += e;
-	if fire < 0:
-		fire = 0
+	if fire == 0:
+		$DeathLayer/DeathPopup.visible = true
+		get_tree().paused = true
 	for sub in fire_subscribers:
 		sub.update_fire()
 
@@ -82,8 +93,12 @@ func _physics_process(delta):
 	if attack_cooldown > 0:
 		attack_cooldown -= 1
 	
-	if Input.is_key_pressed(KEY_K):
-		if attack_cooldown == 0 and fire > 0:
+	if Input.is_key_pressed(KEY_E):
+		if fire == max_fire:
+			explode()
+	
+	if Input.is_action_just_pressed("action"):
+		if attack_cooldown == 0 and fire > 1:
 			fireball.position.x = self.position.x
 			fireball.position.y = self.position.y
 			get_tree().get_root().add_child(fireball)
@@ -149,7 +164,6 @@ func _physics_process(delta):
 	
 	on_air_time += delta
 	
-	GlobalVars.playerSavedPosition = get_position()
 	
 	
 func delays(jump, ground, delta):

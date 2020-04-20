@@ -12,10 +12,10 @@ func _ready():
 
 func execute(collisions):
 	for collision in collisions:
-		if collision.name == "player":
-			collision.affect_fire(1,0)
-			get_parent().queue_free()
-			GlobalVars.score += 1
+		if "Cyclops" in collision.name or "Gorgona" in collision.name or "Centauros" in collision.name:
+			collision.queue_free()
+			GlobalVars.score += 5
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
