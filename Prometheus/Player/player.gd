@@ -56,6 +56,7 @@ func take_damage(source, force):
 		hitstun = DAMAGE_SKIP
 		affect_fire(-1, 0)
 		take_knockback(source, force)
+		$ouch.play()
 	else:
 		hitstun -= _delta
 	
