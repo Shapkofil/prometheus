@@ -19,7 +19,6 @@ func _on_Resume_pressed():
 
 
 func _on_RestartLevel_pressed():
-	
 	get_tree().paused = false
 # warning-ignore:return_value_discarded
 	get_tree().reload_current_scene()
@@ -27,4 +26,5 @@ func _on_RestartLevel_pressed():
 
 func _on_QuitToMain_pressed():
 	get_parent().go_back_to_menu()
+
 

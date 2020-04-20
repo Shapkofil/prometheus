@@ -19,7 +19,6 @@ func _on_Resume_pressed():
 
 
 func _on_RestartLevel_pressed():
-	
 	get_tree().paused = false
 # warning-ignore:return_value_discarded
 	get_tree().reload_current_scene()
