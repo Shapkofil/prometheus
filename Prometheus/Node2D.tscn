@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Assets/Entities/GORGONA/Walk 2 gorgona.png" type="Texture" id=1]
 [ext_resource path="res://Player/player.tscn" type="PackedScene" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://Player/Mobs/centauros.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Player/Mobs/centauros.gd" type="Script" id=27]
 [ext_resource path="res://Player/Mobs/Gorgona.gd" type="Script" id=28]
+[ext_resource path="res://Assets/Background/Mountain background.png" type="Texture" id=29]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -148,7 +149,7 @@ script = ExtResource( 28 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 5 )
 animation = "move-loop"
-frame = 1
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/Gorgona"]
@@ -258,6 +259,17 @@ script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Mountain" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.1, 0 )
+motion_offset = Vector2( 950, -540 )
+motion_mirroring = Vector2( 1920, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Mountain"]
+texture = ExtResource( 29 )
+centered = false
 [connection signal="pressed" from="CanvasLayer/PauseMenu/Resume" to="CanvasLayer" method="_on_Resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/RestartLevel" to="CanvasLayer" method="_on_RestartLevel_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/QuitToMain" to="CanvasLayer" method="_on_QuitToMain_pressed"]
