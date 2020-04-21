@@ -25,13 +25,14 @@ extents = Vector2( 9.76526, 25.0013 )
 
 [node name="Centauros" type="KinematicBody2D"]
 scale = Vector2( 2, 2 )
+collision_layer = 2
 script = ExtResource( 6 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 13.9848, -7.53028 )
 frames = SubResource( 1 )
 animation = "charge-loop"
-frame = 4
+frame = 2
 playing = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/fireball-sound-effect.wav-c0a71a3953e878f02481bfde3f34f065.sample"
+
+[deps]
+
+source_file="res://Player/Sounds/fireball-sound-effect.wav"
+dest_files=[ "res://.import/fireball-sound-effect.wav-c0a71a3953e878f02481bfde3f34f065.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -61,7 +61,7 @@ func take_damage(source, force):
 		hitstun -= _delta
 	
 func take_knockback(source, force):
-		knockdir = (source.position - self.global_position).normalized()
+		knockdir = (source.global_position - self.global_position).normalized()
 		velocity += knockdir * force
 
 func explode():
@@ -69,6 +69,7 @@ func explode():
 	explosion.position.x = global_position.x
 	explosion.position.y = global_position.y
 	get_tree().get_root().add_child(explosion)
+	audio.play_sample('explosion')
 	affect_fire(- max_fire + 1, 0)
 	
 func go_back_to_menu():
@@ -81,6 +82,8 @@ func go_back_to_menu():
 func affect_fire(t, e):
 	fire += t;
 	max_fire += e;
+	if fire > max_fire:
+		fire = max_fire
 	if fire == 0:
 		$DeathLayer/DeathPopup.visible = true
 		get_tree().paused = true

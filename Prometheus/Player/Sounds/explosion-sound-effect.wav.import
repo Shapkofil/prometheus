@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/explosion-sound-effect.wav-c6035fce6dffa32c5f1b87ee441b466f.sample"
+
+[deps]
+
+source_file="res://Player/Sounds/explosion-sound-effect.wav"
+dest_files=[ "res://.import/explosion-sound-effect.wav-c6035fce6dffa32c5f1b87ee441b466f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

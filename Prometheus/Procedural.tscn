@@ -1,26 +1,27 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player UI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Legs.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Tiles/tileset.tres" type="TileSet" id=4]
 [ext_resource path="res://TileMap.gd" type="Script" id=5]
-
-[sub_resource type="AudioStreamSample" id=1]
+[ext_resource path="res://Assets/Background/Mountain background.png" type="Texture" id=6]
+[ext_resource path="res://Presets/Interactable/FireCoin.tscn" type="PackedScene" id=7]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 4 )
 format = 1
+tile_data = PoolIntArray( -131066, 7, 262146, -4, 9, 0, -65535, 10, 0, -65532, 9, 0, -65530, 7, 458753, 65531, 7, 458757, 131065, 7, 327680, 131066, 7, 1, 131067, 7, 262145, 131068, 7, 1, 131069, 7, 131076, 131070, 7, 131076, 131071, 7, 1, 65536, 7, 1, 65537, 7, 1, 65538, 7, 1, 65539, 7, 131076, 65540, 7, 1, 65541, 7, 1, 65542, 7, 1, 65543, 7, 131076, 65544, 7, 393219, 196602, 7, 131072, 196603, 7, 5, 196604, 7, 65537, 196605, 7, 65537, 196606, 7, 65537, 196607, 7, 65537, 131072, 7, 65537, 131073, 7, 65537, 131074, 7, 65537, 131075, 7, 65537, 131076, 7, 65537, 131077, 7, 65537, 131078, 7, 3, 131079, 7, 131074, 262139, 7, 131072, 262140, 7, 4, 262141, 7, 131073, 262142, 7, 4, 262143, 7, 4, 196608, 7, 4, 196609, 7, 131073, 196610, 7, 131073, 196611, 7, 131073, 196612, 7, 131073, 196613, 7, 4, 196614, 7, 131074, 524298, 8, 0, 524304, 8, 0 )
 script = ExtResource( 5 )
-_seed = 21312512
 CHUNK_SIZE = 16
 FLOOR_TO_AIR_RATIO = 0.0
 VARIATION = 3.0
 SPAWN_INFLUENCE = 0.2
 
 [node name="player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 0 )
 WALK_MIN_SPEED = 100
 WALK_MAX_SPEED = 400
 JUMP_MAX_AIRBORNE_TIME = 0.3
@@ -29,5 +30,73 @@ JUMP_MAX_AIRBORNE_TIME = 0.3
 
 [node name="Legs" parent="player" instance=ExtResource( 3 )]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="player"]
-stream = SubResource( 1 )
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+offset = Vector2( 960, 540 )
+transform = Transform2D( 1, 0, 0, 1, 960, 540 )
+
+[node name="Mountain background" type="Sprite" parent="ParallaxBackground"]
+show_behind_parent = true
+texture = ExtResource( 6 )
+
+[node name="WASD" type="TextEdit" parent="."]
+margin_left = -219.594
+margin_top = -105.884
+margin_right = -73.5937
+margin_bottom = -55.8835
+text = " W  Movement
+ASD"
+readonly = true
+draw_spaces = true
+fold_gutter = true
+override_selected_font_color = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="COIN" type="TextEdit" parent="."]
+margin_left = -48.0617
+margin_top = -118.86
+margin_right = 121.938
+margin_bottom = -68.8599
+text = "These are both
+health and mana"
+readonly = true
+draw_spaces = true
+fold_gutter = true
+override_selected_font_color = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="COIN2" type="TextEdit" parent="."]
+margin_left = 141.0
+margin_top = -106.0
+margin_right = 337.0
+margin_bottom = -56.0
+text = "Fire_ball [Q] Costs 1coins
+Explosion [E] Costs 5 coins"
+readonly = true
+draw_spaces = true
+fold_gutter = true
+override_selected_font_color = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="COIN3" type="TextEdit" parent="."]
+margin_left = -590.0
+margin_top = -36.0
+margin_right = -484.0
+margin_bottom = 17.0
+text = "Do a flip
+faggot"
+readonly = true
+draw_spaces = true
+fold_gutter = true
+override_selected_font_color = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FireCoin" parent="." instance=ExtResource( 7 )]
+position = Vector2( 93.094, -94.7891 )

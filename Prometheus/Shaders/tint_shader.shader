@@ -1,77 +1,42 @@
 shader_type canvas_item;
 
-uniform float boost : hint_range(1.0, 2.0, 0.01) = float(1.2);
-uniform float grille_opacity : hint_range(0.0, 1.0, 0.01) = float(0.85);
-uniform float scanlines_opacity : hint_range(0.0, 1.0, 0.01) = float(0.95);
-uniform float vignette_opacity : hint_range(0.1, 0.5, 0.01) = float(0.2);
-uniform float scanlines_speed : hint_range(0.0, 1.0, 0.01) = float(1.0);
-uniform bool show_grille = true;
-uniform bool show_scanlines = true;
-uniform bool show_vignette = true;
-uniform bool show_curvature = true; // Curvature works best on stretch mode 2d.
-uniform vec2 screen_size = vec2(320.0, 180.0);
-uniform float aberration_amount : hint_range(0.0, 10.0, 1.0) = float(0.0);
-uniform bool move_aberration = false;
-uniform float aberration_speed : hint_range(0.01, 10.0, 0.01) = float(1.0);
+uniform vec4 color: hint_color;
+uniform vec2 resolution;
+uniform float vignette_power;
+uniform float vignette_density: hint_range(0,2);
+uniform float stability: hint_range(0,.2);
 
-vec2 CRTCurveUV(vec2 uv) {
-	if(show_curvature) {
-		uv = uv * 2.0 - 1.0;
-		vec2 offset = abs(uv.yx) / vec2(6.0, 4.0);
-		uv = uv + uv * offset * offset;
-		uv = uv * 0.5 + 0.5;
-	}
-	return uv;
+vec3 rgb2hsb(vec3 c){
+    vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+    vec4 p = mix(vec4(c.bg, K.wz),
+                vec4(c.gb, K.xy),
+                step(c.b, c.g));
+    vec4 q = mix(vec4(p.xyw, c.r),
+                vec4(c.r, p.yzx),
+                step(p.x, c.r));
+    float d = q.x - min(q.w, q.y);
+    float e = 1.0e-10;
+    return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)),
+                d / (q.x + e),
+                q.x);
 }
 
-void DrawVignette(inout vec3 color, vec2 uv) {
-	if(show_vignette) {
-		float vignette = uv.x * uv.y * (1.0 - uv.x) * (1.0 - uv.y);
-		vignette = clamp(pow((screen_size.x / 4.0) * vignette, vignette_opacity), 0.0, 1.0);
-		color *= vignette;
-	} else {
-		return;
-	}
+float rand(float time){
+	vec2 co = vec2(time, .0);
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
 }
 
-void DrawScanline(inout vec3 color, vec2 uv, float time) {
-	float scanline = clamp((scanlines_opacity - 0.05) + 0.05 * sin(3.1415926535 * (uv.y + 0.08 * time) * screen_size.y), 0.0, 1.0);
-	float grille = (grille_opacity - 0.15) + 0.15 * clamp(1.5 * sin(3.1415926535 * uv.x * screen_size.x), 0.0, 1.0);
-
-	if (show_scanlines) {
-		color *= scanline;
-	}
-
-	if (show_grille) {
-		color *= grille;
-	}
-
-	color *= boost;
+float vignette(vec2 uv, float value, float density)
+{
+	uv  = 2.*(uv-.5);
+	uv  = cos(uv * resolution/ resolution.y);
+	return min(pow(max((uv.x + uv.y) - density, .0), value), 1);
 }
 
-void fragment() {
-	vec2 screen_crtUV = CRTCurveUV(SCREEN_UV);
-	vec3 color = texture(SCREEN_TEXTURE, screen_crtUV).rgb;
+void fragment()
+{
+	vec4 initial = texture(SCREEN_TEXTURE, SCREEN_UV);
 	
-	if (aberration_amount > 0.0) {
-		float adjusted_amount = aberration_amount / screen_size.x;
-		
-		if (move_aberration == true) {
-			adjusted_amount = (aberration_amount / screen_size.x) * cos((2.0 * 3.14159265359) * (TIME / aberration_speed));
-		} 
-		
-		color.r = texture(SCREEN_TEXTURE, vec2(screen_crtUV.x + adjusted_amount, screen_crtUV.y)).r;
-		color.g = texture(SCREEN_TEXTURE, screen_crtUV).g;
-		color.b = texture(SCREEN_TEXTURE, vec2(screen_crtUV.x - adjusted_amount, screen_crtUV.y)).b;
-	}
-	
-	vec2 crtUV = CRTCurveUV(UV);
-	if (crtUV.x < 0.0 || crtUV.x > 1.0 || crtUV.y < 0.0 || crtUV.y > 1.0) {
-		color = vec3(0.0, 0.0, 0.0);
-	}
-	
-	DrawVignette(color, crtUV);
-	DrawScanline(color, crtUV, TIME * scanlines_speed);
-	
-	COLOR = vec4(color, 1.0);
+	float gray = rgb2hsb(initial.xyz).z;
+	COLOR = vec4((vec3(1.,1.,1.)*gray)*color.xyz*vignette(UV, vignette_power, vignette_density + sin(rand(TIME))*stability),initial.w);
 }

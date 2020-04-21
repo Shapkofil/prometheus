@@ -1,6 +1,6 @@
 extends TileMap
 
-export var _seed = 271382
+export var _seed = -1
 export var CHUNK_SIZE = 64
 export var GEN_RADIUS = 1
 
@@ -25,6 +25,9 @@ var _timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if _seed == -1:
+		_seed = randi()
+	
 	player = get_parent().get_node("player")
 	
 	# Configure Noice
@@ -32,6 +35,11 @@ func _ready():
 	noise.octaves = 4
 	noise.period = 20.0
 	noise.persistence = 0.8
+	
+	# Spawn Chunks
+	for x in range(-1,2):
+		for y in range(-1,1):
+			chunk_cache[Vector2(x,y)]=0
 	
 	# Random Tick
 	_timer = Timer.new()
@@ -45,12 +53,14 @@ func _ready():
 
 var chunk_pos = Vector2(100,100)
 var raw_pos = Vector2(0,0)
-var chunk_cache = {}
+
 
 
 #--------------------------------
 # TERRAIN GENERATION
 #--------------------------------
+
+var chunk_cache = {}
 
 func remap_range(input, minInput, maxInput, minOutput, maxOutput):
 	return(input - minInput) / (maxInput - minInput) * (maxOutput - minOutput) + minOutput
@@ -83,7 +93,8 @@ func generate_chunk(coords):
 
 export var spawnable = {'res://Presets/Interactable/FireCoin.tscn':.02}
 export var mobs = {"res://Player/Mobs/Centauros.tscn":.02, "res://Player/Mobs/Cyclops.tscn":0.02, "res://Player/Mobs/Gorgona.tscn":0.02}
-export var dynamic_spawnable = {'res://Presets/Interactable/Lightning/lightning.tscn':.002}
+export var dynamic_spawnable = {'res://Presets/Interactable/Lightning/lightning.tscn':.0002}
+export var decorations = {"LargeTree":0.1, "SmallTrees":0.5}
 
 func spawn_noise(pos):
 	return platform_noise(pos)*SPAWN_INFLUENCE + rand_range(0, 1)
@@ -111,6 +122,16 @@ func spawn_at(pos, spawn_set):
 			entity.position = map_to_world(pos, true) + cell_size * .5
 			return true
 	return false
+	
+func spawn_tile_at(pos, spawn_set):
+	var chance = rand_range(0,1)
+	var attempt = 0
+	for path in spawn_set.keys():
+		attempt += spawn_set[path]
+		if chance < attempt:
+			set_cellv(pos, tile_set.find_tile_by_name(path))
+			return true
+	return false
 
 func spawn_conditions(pos):
 	if get_cellv(pos + Vector2.DOWN) == -1:
@@ -122,7 +143,17 @@ func spawn_conditions(pos):
 		
 	return true
 	
-
+func decoration_conditions(pos):
+	for x in range(-1,4):
+		for y in range(2):
+			if not get_cellv(pos+Vector2(x,y)) == -1:
+				return false
+	for x in range(3):
+			if get_cellv(pos+Vector2(x,2)) == -1:
+				return false
+				
+	return true
+	
 func spawn_in_chunk(coords, delta):
 	if delta - chunk_cache[coords] < SPAWN_TIME:
 		return
@@ -137,6 +168,8 @@ func spawn_in_chunk(coords, delta):
 				if not spawn_at(pos, spawnable):
 					if spawn_conditions(pos):
 						spawn_at(pos, mobs)
+					elif decoration_conditions(pos):
+						spawn_tile_at(pos, decorations)
 	pass
 
 
